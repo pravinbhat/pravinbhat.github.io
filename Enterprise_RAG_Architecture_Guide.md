@@ -574,7 +574,7 @@ Hot data for fast access:
 
 This is where RAG intelligence happens. The retrieval pipeline consists of seven distinct steps, each improving accuracy or performance.
 
-### Complete Retrieval Pipeline
+### Retrieval Pipeline
 
 ```mermaid
 graph TD
@@ -584,7 +584,7 @@ graph TD
     D -->|Hit| E{Semantic<br/>Cache?}
     D -->|Miss| C1[Generate Embedding]
     C1 --> E
-    E -->|Hit| M[Context Assembly]
+    E -->|Hit| M[Context Assembly<br/>Format chunks into LLM prompt]
     E -->|Miss| F[Hybrid Search]
     
     F --> G[Vector Search<br/>ANN Algorithm]
@@ -614,22 +614,6 @@ graph TD
     style E fill:#ffe1e1
     style T fill:#fff4e1
 ```
-
-### Pipeline Steps Overview
-
-1. **Query Processing**: Clean, expand, embed the query
-2. **Hybrid Search**: Combine vector and keyword search
-3. **Pre-Filtering**: Apply metadata and access control filters
-4. **Post-Retrieval Processing**: Threshold, deduplicate, rerank, boost
-5. **Semantic Caching**: Cache results for performance and consistency
-6. **Context Assembly**: Format chunks into LLM prompt
-7. **LLM Generation**: Generate answer with citations
-
-**Performance Targets:**
-- Fast end-to-end response time
-- Accuracy: Multiple quality gates ensure relevance
-- Scalability: Parallel processing where possible
-- Cost optimization: Caching at multiple levels
 
 ### 1. Query Processing & Understanding
 
