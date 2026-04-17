@@ -153,7 +153,7 @@ graph TB
     end
     
     subgraph "PHASE 3: STORAGE"
-        VectorDB[(Vector Database<br/>OpenSearch, Astra DB, Milvus, Qdrant, pgvector)]
+        VectorDB[(Vector Database<br/>OpenSearch, AstraDB, Milvus, Qdrant, pgvector)]
         MetadataDB[(Metadata Store<br/>Astra DB, PostgreSQL, MongoDB, Cassandra)]
         DocStore[(Document Store<br/>S3, Azure Blob, GCS)]
         Cache[(Caching Layer<br/>Redis, Memcached)]
@@ -171,7 +171,7 @@ graph TB
         PostProc[Post-Processing<br/>Threshold, Dedup, Rerank, Boost]
         SemanticCache[Semantic Caching<br/>Query, Result, Embedding Cache]
         Context[Context Assembly<br/>Prompt Engineering]
-        LLM[LLM Generation<br/>GPT-4, Claude, Llama]
+        LLM[LLM Generation<br/>IBM Granite, OpenAI, Cohere, NVIDIA NIMs]
         Response[Answer + Citations]
         
         Query --> QueryProc
@@ -220,7 +220,7 @@ graph TB
 - Quality Validation
 
 **PHASE 3: STORAGE**
-- Vector Database (OpenSearch, Astra DB, Milvus, Qdrant, pgvector)
+- Vector Database (OpenSearch, AstraDB, Milvus, Qdrant, pgvector)
 - Metadata Store (Astra DB, PostgreSQL, MongoDB, Cassandra)
 - Object Store (S3, Azure Blob, GCS)
 - Caching Layer (Redis, Memcached)
@@ -579,9 +579,9 @@ Metadata is the secret weapon for RAG accuracy:
 Stores embeddings optimized for similarity search:
 
 **Options:**
-- **Milvus (via watsonx.data)**: Integrated vector search within watsonx.data lakehouse architecture, unified governance
 - **OpenSearch (via watsonx.data)**: Native OpenSearch integration for vector search with enterprise data governance
-- **Astra DB (via watsonx.data)**: Managed Cassandra with vector capabilities, now integrated with watsonx.data for unified data access
+- **AstraDB (via watsonx.data)**: Managed Cassandra with vector capabilities, now integrated with watsonx.data for unified data access
+- **Milvus (via watsonx.data)**: Integrated vector search within watsonx.data lakehouse architecture, unified governance
 - **Qdrant**: High performance, Rust-based, excellent for self-hosting
 - **pgvector**: PostgreSQL extension, great if you already use PostgreSQL
 
@@ -615,7 +615,7 @@ Structured data about documents:
 **Architecture Pattern:**
 ```
 watsonx.data Lakehouse
-├── Vector Search (Milvus/OpenSearch)
+├── Vector Search (OpenSearch/AstraDB/Milvus)
 ├── Metadata (Cassandra/AstraDB)
 ├── Object Storage (S3/IBM Cloud Object Storage)
 └── Streaming Data (Confluent Kafka)
@@ -664,7 +664,7 @@ This is where RAG intelligence happens. The retrieval pipeline consists of seven
 ```mermaid
 graph TD
     A[User Query] --> B[Query Cleaning<br/>& Normalization]
-    B --> C[Query Embedding<br/>IBM Granite/OpenAI/NVIDIA]
+    B --> C[Query Embedding<br/>IBM Granite/OpenAI/Cohere/NVIDIA]
     C --> D{Embedding<br/>Cache?}
     D -->|Hit| E{Semantic<br/>Cache?}
     D -->|Miss| C1[Generate Embedding]
@@ -1173,7 +1173,7 @@ For organizations seeking an integrated, enterprise-grade RAG solution, IBM wats
 
 **Data Layer:**
 - **IBM watsonx.data**: Unified lakehouse for all data storage and access
-  - Vector search with Milvus or OpenSearch integration
+  - Vector search with OpenSearch, AstraDB, or Milvus integration
   - Metadata management with Cassandra/AstraDB
   - Object storage with S3-compatible interfaces
   - Query federation across all data sources
@@ -1183,7 +1183,10 @@ For organizations seeking an integrated, enterprise-grade RAG solution, IBM wats
 **AI Layer:**
 - **IBM watsonx.ai**: LLM hosting and inference with flexible model options
   - IBM Granite models (optimized for enterprise use cases)
-  - Third-party models (Llama, Mistral, and others)
+  - OpenAI models (GPT-4, GPT-3.5)
+  - Cohere models (Command, Generate)
+  - NVIDIA NIMs (optimized inference)
+  - Other models (Llama, Mistral, Claude, etc.)
   - Custom fine-tuned models
   - Enterprise-grade performance and reliability
   - Built-in governance and compliance
@@ -1213,15 +1216,16 @@ For organizations seeking an integrated, enterprise-grade RAG solution, IBM wats
 │                    IBM watsonx Platform                    │
 ├────────────────────────────────────────────────────────────┤
 │                                                            │
-│  ┌──────────────────┐  ┌──────────────────┐                │
-│  │  watsonx.data    │  │   watsonx.ai     │                │
-│  │  ─────────────   │  │  ──────────────  │                │
-│  │  • Milvus        │  │  • Granite LLMs  │                │
-│  │  • OpenSearch    │  │  • Embeddings    │                │
-│  │  • Cassandra     │  │  • Inference     │                │
-│  │  • Kafka         │  │                  │                │
-│  │  • Object Store  │  │                  │                │
-│  └──────────────────┘  └──────────────────┘                │
+│  ┌──────────────────┐  ┌──────────────────────────────┐    │
+│  │  watsonx.data    │  │       watsonx.ai             │    │
+│  │  ─────────────   │  │  ──────────────────────────  │    │
+│  │  • OpenSearch    │  │  • IBM Granite LLMs          │    │
+│  │  • AstraDB       │  │  • OpenAI (GPT-4, etc.)      │    │
+│  │  • Milvus        │  │  • Cohere (Command, etc.)    │    │
+│  │  • Cassandra     │  │  • NVIDIA NIMs               │    │
+│  │  • Kafka         │  │  • Other Models              │    │
+│  │  • Object Store  │  │  • Embeddings & Inference    │    │
+│  └──────────────────┘  └──────────────────────────────┘    │
 │                                                            │
 │  ┌──────────────────────────────────────────────────────┐  │
 │  │           watsonx.governance                         │  │
