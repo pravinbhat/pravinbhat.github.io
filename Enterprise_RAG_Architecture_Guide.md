@@ -86,35 +86,15 @@ RAG keeps knowledge separate and queryable, while fine-tuning embeds it in model
 
 RAG is transforming how enterprises access and leverage their knowledge:
 
-### Knowledge Management
-- Internal wikis and documentation search
-- Policy and procedure retrieval
-- Employee self-service Q&A systems
-- Institutional knowledge preservation
+**Knowledge Management**: Internal wikis and documentation search, policy and procedure retrieval, employee self-service Q&A systems, and institutional knowledge preservation.
 
-### Customer Support
-- Automated support with accurate answers
-- Agent assistance tools
-- Ticket deflection and resolution
-- 24/7 customer service availability
+**Customer Support**: Automated support with accurate answers, agent assistance tools, ticket deflection and resolution, and 24/7 customer service availability.
 
-### Compliance & Legal
-- Policy search and interpretation
-- Regulatory compliance checks
-- Contract analysis and review
-- Legal precedent research
+**Compliance & Legal**: Policy search and interpretation, regulatory compliance checks, contract analysis and review, and legal precedent research.
 
-### Research & Development
-- Scientific literature search
-- Patent analysis and prior art search
-- Research paper discovery
-- Technical documentation retrieval
+**Research & Development**: Scientific literature search, patent analysis and prior art search, research paper discovery, and technical documentation retrieval.
 
-### Sales & Marketing
-- Product information retrieval
-- Competitive intelligence gathering
-- Sales enablement materials
-- Marketing content discovery
+**Sales & Marketing**: Product information retrieval, competitive intelligence gathering, sales enablement materials, and marketing content discovery.
 
 These use cases demonstrate RAG's versatility across enterprise functions, with typical ROI achieved within 3-6 months of deployment.
 
@@ -122,82 +102,86 @@ These use cases demonstrate RAG's versatility across enterprise functions, with 
 
 ## RAG Reference Architecture
 
-The complete RAG architecture consists of five distinct phases, each with specific responsibilities and technologies.
+The RAG architecture can be organized into multiple phases, each with specific responsibilities and technologies. For this guide, we break it down into five key phases that cover the complete lifecycle from data ingestion to production monitoring.
 
-### Complete 5-Phase Pipeline
+### Complete Pipeline Architecture
 
 ```mermaid
 graph TB
-    subgraph "PHASE 1: DATA INGESTION"
-        Sources[Document Sources<br/>SharePoint, S3, Databases, APIs]
-        Parsers[File Parsers<br/>PDF, DOCX, HTML, Code]
-        Extractors[Content Extractors<br/>Text, Tables, Images, OCR]
-        Validation[Data Validation<br/>Quality Gates, Deduplication]
+    subgraph "OFFLINE PIPELINE - Data Preparation"
+        subgraph "PHASE 1: DATA INGESTION"
+            Sources[Document Sources<br/>SharePoint, S3, Databases, APIs]
+            Parsers[File Parsers<br/>PDF, DOCX, HTML, Code]
+            Extractors[Content Extractors<br/>Text, Tables, Images, OCR]
+            Validation[Data Validation<br/>Quality Gates, Deduplication]
+            
+            Sources --> Parsers
+            Parsers --> Extractors
+            Extractors --> Validation
+        end
         
-        Sources --> Parsers
-        Parsers --> Extractors
-        Extractors --> Validation
+        subgraph "PHASE 2: DATA ENRICHMENT"
+            Chunking[Chunking Strategy<br/>Fixed, Semantic, Sliding Window, Hierarchical]
+            Embedding[Embedding Generation<br/>IBM Granite, OpenAI, Cohere, NVIDIA NIMs]
+            Metadata[Metadata Extraction<br/>NER, Classification, Tagging]
+            QualityCheck[Quality Validation<br/>Completeness, Accuracy]
+            
+            Validation --> Chunking
+            Chunking --> Embedding
+            Chunking --> Metadata
+            Embedding --> QualityCheck
+            Metadata --> QualityCheck
+        end
+        
+        subgraph "PHASE 3: STORAGE"
+            VectorDB[(Vector Database<br/>watsonx.data: OpenSearch, AstraDB, Milvus, Qdrant)]
+            MetadataDB[(Metadata Store<br/>watsonx.data: Cassandra, AstraDB, MongoDB)]
+            DocStore[(Object Store<br/>watsonx.data: S3, Azure Blob, GCS)]
+            Cache[(Caching Layer<br/>Redis, Memcached)]
+            
+            QualityCheck --> VectorDB
+            QualityCheck --> MetadataDB
+            QualityCheck --> DocStore
+        end
     end
     
-    subgraph "PHASE 2: DATA ENRICHMENT"
-        Chunking[Chunking Strategy<br/>Fixed, Semantic, Sliding Window, Hierarchical]
-        Embedding[Embedding Generation<br/>IBM Granite, OpenAI, Cohere, NVIDIA NIMs]
-        Metadata[Metadata Extraction<br/>NER, Classification, Tagging]
-        QualityCheck[Quality Validation<br/>Completeness, Accuracy]
+    subgraph "ONLINE PIPELINE - Query Time"
+        subgraph "PHASE 4: RETRIEVAL & GENERATION"
+            Query[User Query]
+            QueryProc[Query Processing<br/>Clean, Expand, Embed]
+            HybridSearch[Hybrid Search<br/>Vector + Keyword]
+            PreFilter[Pre-Filtering<br/>Metadata, Access Control]
+            PostProc[Post-Processing<br/>Threshold, Dedup, Rerank, Boost]
+            SemanticCache[Semantic Caching<br/>Query, Result, Embedding Cache]
+            Context[Context Assembly<br/>Prompt Engineering]
+            LLM[LLM Generation<br/>watsonx.ai: IBM Granite, OpenAI, Cohere, NVIDIA NIMs]
+            Response[Answer + Citations]
+            
+            Query --> QueryProc
+            QueryProc --> SemanticCache
+            SemanticCache -->|Cache Miss| HybridSearch
+            SemanticCache -->|Cache Hit| Context
+            HybridSearch --> PreFilter
+            PreFilter --> VectorDB
+            PreFilter --> MetadataDB
+            VectorDB --> PostProc
+            PostProc --> Context
+            Context --> LLM
+            LLM --> Response
+            PostProc --> Cache
+        end
         
-        Validation --> Chunking
-        Chunking --> Embedding
-        Chunking --> Metadata
-        Embedding --> QualityCheck
-        Metadata --> QualityCheck
-    end
-    
-    subgraph "PHASE 3: STORAGE"
-        VectorDB[(Vector Database<br/>watsonx.data: OpenSearch, AstraDB, Milvus, Qdrant)]
-        MetadataDB[(Metadata Store<br/>watsonx.data: Cassandra, AstraDB, MongoDB)]
-        DocStore[(Object Store<br/>watsonx.data: S3, Azure Blob, GCS)]
-        Cache[(Caching Layer<br/>Redis, Memcached)]
-        
-        QualityCheck --> VectorDB
-        QualityCheck --> MetadataDB
-        QualityCheck --> DocStore
-    end
-    
-    subgraph "PHASE 4: RETRIEVAL & GENERATION"
-        Query[User Query]
-        QueryProc[Query Processing<br/>Clean, Expand, Embed]
-        HybridSearch[Hybrid Search<br/>Vector + Keyword]
-        PreFilter[Pre-Filtering<br/>Metadata, Access Control]
-        PostProc[Post-Processing<br/>Threshold, Dedup, Rerank, Boost]
-        SemanticCache[Semantic Caching<br/>Query, Result, Embedding Cache]
-        Context[Context Assembly<br/>Prompt Engineering]
-        LLM[LLM Generation<br/>watsonx.ai: IBM Granite, OpenAI, Cohere, NVIDIA NIMs]
-        Response[Answer + Citations]
-        
-        Query --> QueryProc
-        QueryProc --> SemanticCache
-        SemanticCache -->|Cache Miss| HybridSearch
-        SemanticCache -->|Cache Hit| Context
-        HybridSearch --> PreFilter
-        PreFilter --> VectorDB
-        PreFilter --> MetadataDB
-        VectorDB --> PostProc
-        PostProc --> Context
-        Context --> LLM
-        LLM --> Response
-        PostProc --> Cache
-    end
-    
-    subgraph "PHASE 5: OBSERVABILITY"
-        Metrics[Metrics<br/>IBM Instana, watsonx.governance]
-        Logging[Logging<br/>IBM Instana, OpenTelemetry]
-        Tracing[Tracing<br/>OpenTelemetry, IBM Instana]
-        Evaluation[Evaluation<br/>Quality, Relevance, Cost]
-        
-        Response --> Metrics
-        Response --> Logging
-        Response --> Tracing
-        Response --> Evaluation
+        subgraph "PHASE 5: OBSERVABILITY"
+            Metrics[Metrics<br/>IBM Instana, watsonx.governance]
+            Logging[Logging<br/>IBM Instana, OpenTelemetry]
+            Tracing[Tracing<br/>OpenTelemetry, IBM Instana]
+            Evaluation[Evaluation<br/>Quality, Relevance, Cost]
+            
+            Response --> Metrics
+            Response --> Logging
+            Response --> Tracing
+            Response --> Evaluation
+        end
     end
     
     style Sources fill:#e1f5ff
@@ -207,6 +191,10 @@ graph TB
 ```
 
 ### Architecture Overview
+
+The architecture operates through two distinct pipelines: an **offline pipeline** optimized for quality and completeness (runs periodically, batch processing), and an **online pipeline** optimized for speed and user experience (real-time processing with caching). This separation enables independent scaling, different optimization goals, and flexible updates without affecting online performance.
+
+**OFFLINE PIPELINE - Data Preparation:**
 
 **PHASE 1: DATA INGESTION**
 - Document Sources (SharePoint, Object Stores, Databases, APIs)
@@ -225,97 +213,24 @@ graph TB
 - Object Store (watsonx.data: S3, Azure Blob, GCS)
 - Caching Layer (Redis, Memcached)
 
-**PHASE 4: RETRIEVAL & GENERATION** ⭐
-- Query Processing, Hybrid Search, Pre-Filtering
-- Post-Retrieval Processing, Semantic Caching
-- Context Assembly, LLM Generation
+**ONLINE PIPELINE - Query Time:**
+
+**PHASE 4: RETRIEVAL & GENERATION**
+- Query Processing (Clean, Expand, Embed)
+- Hybrid Search (Vector + Keyword)
+- Pre-Filtering (Metadata, Access Control)
+- Post-Retrieval Processing (Threshold, Deduplication, Reranking, Boosting)
+- Semantic Caching (Query, Result, Embedding Cache)
+- Context Assembly & Prompt Engineering
+- LLM Generation (watsonx.ai: IBM Granite, OpenAI, Cohere, NVIDIA NIMs)
 
 **PHASE 5: OBSERVABILITY**
-- Metrics, Logging, Tracing, Evaluation
+- Metrics (IBM Instana, watsonx.governance)
+- Logging (IBM Instana, OpenTelemetry)
+- Tracing (OpenTelemetry, IBM Instana)
+- Evaluation (Quality, Relevance, Cost)
 
-This architecture is cloud-agnostic and can be deployed on any platform, with each phase independently scalable based on workload requirements.
-
----
-
-## Data Flow Overview
-
-RAG systems operate through two distinct pipelines with different performance characteristics and optimization goals.
-
-```mermaid
-graph TB
-    subgraph "OFFLINE PIPELINE - Data Preparation"
-        direction TB
-        O1[Document Sources] --> O2[Ingestion & Parsing]
-        O2 --> O3[Chunking]
-        O3 --> O4[Embedding Generation<br/>Batch Processing]
-        O4 --> O5[Metadata Extraction]
-        O5 --> O6[Quality Validation]
-        O6 --> O7[(Vector DB + Metadata DB)]
-        
-        style O1 fill:#e3f2fd
-        style O7 fill:#f3e5f5
-    end
-    
-    subgraph "ONLINE PIPELINE - Query Time"
-        direction TB
-        N1[User Query] --> N2[Query Embedding<br/>Real-time]
-        N2 --> N3{Cache<br/>Check}
-        N3 -->|Miss| N4[Vector Search<br/>+ Filtering]
-        N3 -->|Hit| N8[Cached Results]
-        N4 --> N5[Reranking<br/>+ Boosting]
-        N5 --> N6[Context Assembly]
-        N8 --> N6
-        N6 --> N7[LLM Generation]
-        N7 --> N9[Answer]
-        
-        style N1 fill:#e1f5ff
-        style N9 fill:#e8f5e9
-        style N3 fill:#ffe1e1
-    end
-    
-    O7 -.->|Reads| N4
-    
-    note1[Offline Pipeline<br/>Focus: Quality & Completeness]
-    note2[Online Pipeline<br/>Focus: Speed & User Experience]
-    
-    style note1 fill:#fff9c4
-    style note2 fill:#fff9c4
-```
-
-### Offline Pipeline (Data Preparation)
-
-The offline pipeline focuses on quality and completeness:
-
-1. **Ingest**: Documents → Parse → Extract content
-2. **Enrich**: Chunk → Embed → Extract metadata
-3. **Store**: Save vectors + metadata to databases
-
-**Characteristics:**
-- Runs periodically (batch or streaming)
-- Can take hours or days for large corpora
-- Optimized for thoroughness, not speed
-- Allows for comprehensive quality checks
-
-### Online Pipeline (Query Time)
-
-The online pipeline focuses on speed and user experience:
-
-4. **Query**: User question → Embed query
-5. **Retrieve**: Search vectors → Filter → Rerank
-6. **Generate**: Build context → LLM → Answer
-
-**Characteristics:**
-- Real-time processing with fast response times
-- Optimized for latency and throughput
-- Heavy use of caching at multiple layers
-- Parallel processing where possible
-
-### Key Benefits of Separation
-
-- **Independent scaling**: Scale each pipeline based on its specific needs
-- **Different optimization goals**: Quality vs speed
-- **Flexible updates**: Update offline pipeline without affecting online performance
-- **Cost optimization**: Batch processing offline, real-time online
+This cloud-agnostic architecture can be deployed on any platform, with each phase independently scalable based on workload requirements.
 
 ---
 
