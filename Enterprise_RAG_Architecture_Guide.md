@@ -1157,7 +1157,11 @@ This comprehensive guide provides a complete reference architecture for implemen
 </br></br>
 
 _**Author**: Pravin Bhat, Enterprise Solution Architect, IBM (Watsonx Data Labs)_
-
 _**Last Updated**: April 17th, 2026_
-
 _**Target Audience**: Technical Architects, Solution Architects, Engineering leaders, AI Developers_
+
+
+
+---
+
+_✨ Special thanks to [IBM BOB](https://bob.ibm.com/) for being my AI blog partner in crafting this guide! 🤖_
