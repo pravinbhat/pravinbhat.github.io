@@ -1,10 +1,5 @@
 # Enterprise AI Search with RAG: Complete Architecture Guide
 
-**Author**: Pravin Bhat, Enterprise Solution Architect, IBM (Watsonx Data Labs)  
-**Last Updated**: April 2026  
-**Target Audience**: Technical Architects, Solution Architects, Engineering leaders, AI Developers
-
----
 
 ## Table of Contents
 
@@ -1157,3 +1152,12 @@ This comprehensive guide provides a complete reference architecture for implemen
 5. Implement monitoring and evaluation from day one
 
 ---
+
+
+</br></br>
+
+_**Author**: Pravin Bhat, Enterprise Solution Architect, IBM (Watsonx Data Labs)_
+
+_**Last Updated**: April 17th, 2026_
+
+_**Target Audience**: Technical Architects, Solution Architects, Engineering leaders, AI Developers_
