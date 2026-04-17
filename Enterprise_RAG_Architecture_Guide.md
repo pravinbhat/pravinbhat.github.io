@@ -662,7 +662,7 @@ This is where RAG intelligence happens. The retrieval pipeline consists of seven
 ### Complete Retrieval Pipeline
 
 ```mermaid
-graph LR
+graph TD
     A[User Query] --> B[Query Cleaning<br/>& Normalization]
     B --> C[Query Embedding<br/>IBM Granite/OpenAI/NVIDIA]
     C --> D{Embedding<br/>Cache?}
