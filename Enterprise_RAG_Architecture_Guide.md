@@ -722,7 +722,7 @@ Hybrid search is the gold standard for production RAG systems, combining the str
 
 ```mermaid
 graph TB
-    Query[User Query:<br/>"What is machine learning?"]
+    Query[User Query:<br/>&quot;What is machine learning?&quot;]
     
     subgraph "Vector Search Path"
         V1[Query Embedding<br/>1024-dim vector]
