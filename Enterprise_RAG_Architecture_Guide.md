@@ -141,7 +141,7 @@ graph TB
     
     subgraph "PHASE 2: DATA ENRICHMENT"
         Chunking[Chunking Strategy<br/>Fixed, Semantic, Sliding Window, Hierarchical]
-        Embedding[Embedding Generation<br/>IBM Granite, OpenAI, Cohere, NVIDIA]
+        Embedding[Embedding Generation<br/>IBM Granite, OpenAI, Cohere, NVIDIA NIMs]
         Metadata[Metadata Extraction<br/>NER, Classification, Tagging]
         QualityCheck[Quality Validation<br/>Completeness, Accuracy]
         
@@ -153,9 +153,9 @@ graph TB
     end
     
     subgraph "PHASE 3: STORAGE"
-        VectorDB[(Vector Database<br/>OpenSearch, AstraDB, Milvus, Qdrant, pgvector)]
-        MetadataDB[(Metadata Store<br/>Astra DB, PostgreSQL, MongoDB, Cassandra)]
-        DocStore[(Document Store<br/>S3, Azure Blob, GCS)]
+        VectorDB[(Vector Database<br/>watsonx.data: OpenSearch, AstraDB, Milvus, Qdrant)]
+        MetadataDB[(Metadata Store<br/>watsonx.data: Cassandra, AstraDB, MongoDB)]
+        DocStore[(Object Store<br/>watsonx.data: S3, Azure Blob, GCS)]
         Cache[(Caching Layer<br/>Redis, Memcached)]
         
         QualityCheck --> VectorDB
@@ -171,7 +171,7 @@ graph TB
         PostProc[Post-Processing<br/>Threshold, Dedup, Rerank, Boost]
         SemanticCache[Semantic Caching<br/>Query, Result, Embedding Cache]
         Context[Context Assembly<br/>Prompt Engineering]
-        LLM[LLM Generation<br/>IBM Granite, OpenAI, Cohere, NVIDIA NIMs]
+        LLM[LLM Generation<br/>watsonx.ai: IBM Granite, OpenAI, Cohere, NVIDIA NIMs]
         Response[Answer + Citations]
         
         Query --> QueryProc
@@ -189,9 +189,9 @@ graph TB
     end
     
     subgraph "PHASE 5: OBSERVABILITY"
-        Metrics[Metrics<br/>Prometheus, DataDog]
-        Logging[Logging<br/>ELK, Splunk]
-        Tracing[Tracing<br/>OpenTelemetry, Jaeger]
+        Metrics[Metrics<br/>IBM Instana, watsonx.governance]
+        Logging[Logging<br/>IBM Instana, OpenTelemetry]
+        Tracing[Tracing<br/>OpenTelemetry, IBM Instana]
         Evaluation[Evaluation<br/>Quality, Relevance, Cost]
         
         Response --> Metrics
@@ -215,14 +215,14 @@ graph TB
 
 **PHASE 2: DATA ENRICHMENT**
 - Chunking Strategy (Fixed, Semantic, Sliding Window, Hierarchical)
-- Embedding Generation (IBM Granite, OpenAI, Cohere, NVIDIA NIMs)
+- Embedding Generation (watsonx.ai: IBM Granite, OpenAI, Cohere, NVIDIA NIMs)
 - Metadata Extraction (NER, Classification, Tagging)
 - Quality Validation
 
 **PHASE 3: STORAGE**
-- Vector Database (OpenSearch, AstraDB, Milvus, Qdrant, pgvector)
-- Metadata Store (Astra DB, PostgreSQL, MongoDB, Cassandra)
-- Object Store (S3, Azure Blob, GCS)
+- Vector Database (watsonx.data: OpenSearch, AstraDB, Milvus, Qdrant)
+- Metadata Store (watsonx.data: Cassandra, AstraDB, MongoDB)
+- Object Store (watsonx.data: S3, Azure Blob, GCS)
 - Caching Layer (Redis, Memcached)
 
 **PHASE 4: RETRIEVAL & GENERATION** ⭐
@@ -1038,6 +1038,13 @@ graph TB
 
 The final step generates the answer using the assembled context.
 
+**LLM Options (via watsonx.ai):**
+- **IBM Granite**: Enterprise-optimized models with governance
+- **OpenAI**: GPT-4, GPT-3.5 for high-quality responses
+- **Cohere**: Command models for generation tasks
+- **NVIDIA NIMs**: GPU-optimized inference
+- **Other models**: Llama, Mistral, Claude, and custom fine-tuned models
+
 **Generation Options:**
 - **Streaming**: Tokens appear immediately (better UX)
 - **Batch**: Complete response at once (easier error handling)
@@ -1067,25 +1074,25 @@ graph TB
     end
     
     subgraph "Observability Components"
-        API --> Metrics[Metrics Collection<br/>Prometheus]
-        API --> Logs[Structured Logging<br/>JSON Format]
-        API --> Traces[Distributed Tracing<br/>OpenTelemetry]
+        API --> Metrics[Metrics<br/>IBM Instana, watsonx.governance, Prometheus]
+        API --> Logs[Logging<br/>IBM Cloud Logs, Splunk]
+        API --> Traces[Tracing<br/>OpenTelemetry, IBM Instana]
         
-        Metrics --> Grafana[Grafana Dashboards<br/>Latency, Throughput, Errors]
-        Logs --> ELK[ELK Stack<br/>Elasticsearch, Logstash, Kibana]
-        Traces --> Jaeger[Jaeger UI<br/>Request Flow Visualization]
+        Metrics --> Dashboard[Monitoring Dashboard<br/>IBM Instana, Grafana]
+        Logs --> Analysis[Log Analysis<br/>Error Patterns, Trends]
+        Traces --> Debug[Performance Debugging<br/>Bottleneck Identification]
     end
     
     subgraph "Alerting & Analysis"
-        Grafana --> Alerts[Alert Manager<br/>PagerDuty, Slack]
-        ELK --> Analysis[Log Analysis<br/>Error Patterns]
-        Jaeger --> Debug[Performance Debugging<br/>Bottleneck Identification]
+        Dashboard --> Alerts[Alert Manager<br/>PagerDuty, Slack]
+        Governance --> Analysis[AI Quality Analysis<br/>Model Drift, Bias Detection]
+        Instana --> Debug[Performance Debugging<br/>Bottleneck Identification]
     end
     
     style API fill:#e1f5ff
-    style Grafana fill:#e8f5e9
-    style ELK fill:#e8f5e9
-    style Jaeger fill:#e8f5e9
+    style Dashboard fill:#e8f5e9
+    style Analysis fill:#e8f5e9
+    style Debug fill:#e8f5e9
 ```
 
 ### Why Observability Matters
@@ -1129,11 +1136,16 @@ graph TB
 
 ### Monitoring Tools and Platforms
 
-- **AI Governance**: IBM watsonx.governance for AI lifecycle management and compliance tracking
-- **APM**: IBM Instana, New Relic, Dynatrace, AppDynamics for application performance monitoring
-- **Metrics**: Prometheus (open source), DataDog, CloudWatch
-- **Logging**: ELK Stack (Elasticsearch, Logstash, Kibana), Splunk, CloudWatch Logs
-- **Tracing**: Jaeger, Zipkin, OpenTelemetry for distributed tracing
+**Recommended IBM Stack:**
+- **IBM watsonx.governance**: AI lifecycle management, model monitoring, compliance tracking, bias detection
+- **IBM Instana**: Application performance monitoring, distributed tracing, real-time observability
+- **IBM Cloud Logs**: Centralized logging and analysis
+- **OpenTelemetry**: Industry-standard distributed tracing and metrics collection
+
+**Alternative Options:**
+- **APM**: New Relic, Dynatrace, AppDynamics
+- **Metrics**: Prometheus, DataDog, CloudWatch
+- **Logging**: Splunk, CloudWatch Logs
 
 ### Best Practices
 
