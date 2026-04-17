@@ -1235,25 +1235,11 @@ For organizations seeking an integrated, enterprise-grade RAG solution, IBM wats
 └────────────────────────────────────────────────────────────┘
 ```
 
-#### Getting Started
-
-1. **Assessment** (1-2 weeks): Evaluate your data sources and use cases
-2. **POC** (2-4 weeks): Build proof of concept with watsonx.data
-3. **Pilot** (1-2 months): Deploy to limited user group
-4. **Production** (2-4 months): Scale to full deployment
-5. **Optimization** (Ongoing): Continuous improvement and monitoring
-
-This architecture provides a solid foundation for enterprise RAG systems while maintaining the flexibility to integrate with existing tools and workflows.
-
 ---
-
-
-</br></br>
 
 _**Author**: Pravin Bhat, Enterprise Solution Architect, IBM (Watsonx Data Labs)_
 _**Last Updated**: April 17th, 2026_
 _**Target Audience**: Technical Architects, Solution Architects, Engineering leaders, AI Developers_
-
 
 ---
 
