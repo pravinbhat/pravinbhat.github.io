@@ -133,12 +133,10 @@ graph TB
         subgraph "PHASE 3: STORAGE"
             VectorDB[(Vector Database<br/>watsonx.data: OpenSearch, AstraDB, Milvus, Qdrant)]
             MetadataDB[(Metadata Store<br/>watsonx.data: Cassandra, AstraDB, MongoDB)]
-            DocStore[(Object Store<br/>watsonx.data: S3, Azure Blob, GCS)]
             Cache[(Caching Layer<br/>Redis, Memcached)]
             
-            QualityCheck --> VectorDB
-            QualityCheck --> MetadataDB
-            QualityCheck --> DocStore
+            Embedding --> VectorDB
+            Metadata --> MetadataDB
         end
     end
     
@@ -206,7 +204,6 @@ The architecture operates through two distinct pipelines: an **offline pipeline*
 **PHASE 3: STORAGE**
 - Vector Database (watsonx.data: OpenSearch, AstraDB, Milvus, Qdrant)
 - Metadata Store (watsonx.data: Cassandra, AstraDB, MongoDB)
-- Object Store (watsonx.data: S3, Azure Blob, GCS)
 - Caching Layer (Redis, Memcached)
 
 **ONLINE PIPELINE - Query Time:**
@@ -530,29 +527,7 @@ Structured data about documents:
 - **PostgreSQL**: Mature, reliable, excellent query capabilities
 - **MongoDB**: Flexible schema, good for evolving metadata
 
-#### 3. Unified Data Lakehouse (watsonx.data)
-
-**IBM watsonx.data** provides a unified lakehouse architecture that consolidates multiple storage components:
-
-**Key Benefits:**
-- **Unified Governance**: Single governance layer across all data sources
-- **Query Federation**: Query across vector databases, metadata stores, and object storage with a single interface
-- **Cost Optimization**: Open table formats (Iceberg, Hudi, Delta Lake) reduce storage costs
-- **Multi-Engine Support**: Presto, Spark, and other engines for diverse workloads
-- **Native Integrations**: Built-in connectors for Cassandra, OpenSearch, Kafka, and traditional databases
-
-**Architecture Pattern:**
-```
-watsonx.data Lakehouse
-├── Vector Search (OpenSearch/AstraDB/Milvus)
-├── Metadata (Cassandra/AstraDB)
-├── Object Storage (S3/IBM Cloud Object Storage)
-└── Streaming Data (Confluent Kafka)
-```
-
-This unified approach simplifies RAG architecture by providing a single platform for all data storage and access needs, while maintaining compatibility with industry-standard object stores like S3, Azure Blob, and Google Cloud Storage.
-
-#### 4. Caching Layer
+#### 3. Caching Layer
 
 Hot data for fast access:
 
@@ -1104,6 +1079,23 @@ For organizations seeking an integrated, enterprise-grade RAG solution, IBM wats
   - Query federation across all data sources
 - **Confluent Kafka (via watsonx.data)**: Real-time streaming data ingestion
 - **Open table formats**: Iceberg, Hudi, Delta Lake for cost optimization
+
+**Unified Data Lakehouse:**
+- **IBM watsonx.data**: Unified lakehouse architecture that consolidates storage components
+  - **Unified Governance**: Single governance layer across all data sources
+  - **Query Federation**: Query across vector databases, metadata stores, and object storage with a single interface
+  - **Cost Optimization**: Open table formats (Iceberg, Hudi, Delta Lake) reduce storage costs
+  - **Multi-Engine Support**: Presto, Spark, and other engines for diverse workloads
+  - **Native Integrations**: Built-in connectors for Cassandra, OpenSearch, Kafka, and traditional databases
+  - **Architecture Pattern**:
+    ```
+    watsonx.data Lakehouse
+    ├── Vector Search (OpenSearch/AstraDB/Milvus)
+    ├── Metadata (Cassandra/AstraDB)
+    ├── Object Storage (S3/IBM Cloud Object Storage)
+    └── Streaming Data (Confluent Kafka)
+    ```
+  - This unified approach simplifies RAG architecture by providing a single platform for all data storage and access needs
 
 **AI Layer:**
 - **IBM watsonx.ai**: LLM hosting and inference with flexible model options
