@@ -1067,66 +1067,9 @@ graph TB
 
 ### IBM watsonx.data Reference Architecture
 
-For organizations seeking an integrated, enterprise-grade RAG solution, IBM watsonx.data provides a comprehensive platform that simplifies architecture while maintaining flexibility and performance.
+For organizations seeking an integrated, enterprise-grade RAG solution, IBM watsonx.data provides a comprehensive platform that simplifies architecture while maintaining flexibility and performance. **watsonx.data makes ALL your enterprise data accessible and understandable for AI to help you maximize business value.** The unified lakehouse approach consolidates all data storage and access needs into a single, governed platform.
 
-#### Recommended Stack
-
-**Data Layer:**
-- **IBM watsonx.data**: Unified lakehouse for all data storage and access
-  - Vector search with OpenSearch, AstraDB, or Milvus integration
-  - Metadata management with Cassandra/AstraDB
-  - Object storage with S3-compatible interfaces
-  - Query federation across all data sources
-- **Confluent Kafka (via watsonx.data)**: Real-time streaming data ingestion
-- **Open table formats**: Iceberg, Hudi, Delta Lake for cost optimization
-
-**Unified Data Lakehouse:**
-- **IBM watsonx.data**: Unified lakehouse architecture that consolidates storage components
-  - **Unified Governance**: Single governance layer across all data sources
-  - **Query Federation**: Query across vector databases, metadata stores, and object storage with a single interface
-  - **Cost Optimization**: Open table formats (Iceberg, Hudi, Delta Lake) reduce storage costs
-  - **Multi-Engine Support**: Presto, Spark, and other engines for diverse workloads
-  - **Native Integrations**: Built-in connectors for Cassandra, OpenSearch, Kafka, and traditional databases
-  - **Architecture Pattern**:
-    ```
-    watsonx.data Lakehouse
-    ├── Vector Search (OpenSearch/AstraDB/Milvus)
-    ├── Metadata (Cassandra/AstraDB)
-    ├── Object Storage (S3/IBM Cloud Object Storage)
-    └── Streaming Data (Confluent Kafka)
-    ```
-  - This unified approach simplifies RAG architecture by providing a single platform for all data storage and access needs
-
-**AI Layer:**
-- **IBM watsonx.ai**: LLM hosting and inference with flexible model options
-  - IBM Granite models (optimized for enterprise use cases)
-  - OpenAI models (GPT-4, GPT-3.5)
-  - Cohere models (Command, Generate)
-  - NVIDIA NIMs (optimized inference)
-  - Other models (Llama, Mistral, Claude, etc.)
-  - Custom fine-tuned models
-  - Enterprise-grade performance and reliability
-  - Built-in governance and compliance
-- **IBM watsonx.governance**: AI lifecycle management
-  - Model monitoring and drift detection
-  - Compliance tracking and audit trails
-  - Risk management and bias detection
-
-**Monitoring & Operations:**
-- **IBM Instana**: Application performance monitoring
-- **IBM watsonx.governance**: AI-specific observability
-- **OpenTelemetry**: Distributed tracing across the pipeline
-
-#### Key Benefits of watsonx.data Architecture
-
-1. **Unified Governance**: Single governance layer across all data sources and AI models
-2. **Simplified Integration**: Native connectors reduce integration complexity
-3. **Cost Optimization**: Open formats and efficient storage reduce infrastructure costs
-4. **Enterprise Support**: Comprehensive support and SLAs for production deployments
-5. **Flexibility**: Works with existing tools while providing integrated alternatives
-6. **Scalability**: Proven at enterprise scale with global deployments
-
-#### Architecture Pattern
+#### Architecture Overview
 
 ```
 ┌────────────────────────────────────────────────────────────┐
@@ -1151,6 +1094,64 @@ For organizations seeking an integrated, enterprise-grade RAG solution, IBM wats
 │                                                            │
 └────────────────────────────────────────────────────────────┘
 ```
+
+#### Technology Stack
+
+**Data Layer - IBM watsonx.data (Unified Lakehouse):**
+- **Vector Search**: OpenSearch, AstraDB, or Milvus integration for semantic search
+- **Metadata Management**: Cassandra/AstraDB for document and chunk metadata
+- **Object Storage**: S3-compatible interfaces (IBM Cloud Object Storage)
+- **Streaming Data**: Confluent Kafka integration for real-time data ingestion
+- **Open Table Formats**: Iceberg, Hudi, Delta Lake for cost-optimized storage
+- **Query Federation**: Single interface to query across all data sources
+- **Multi-Engine Support**: Presto, Spark, and other engines for diverse workloads
+
+**AI Layer - IBM watsonx.ai:**
+- **LLM Hosting & Inference**: Flexible model deployment options
+  - IBM Granite models (optimized for enterprise use cases)
+  - OpenAI models (GPT-4, GPT-3.5)
+  - Cohere models (Command, Generate)
+  - NVIDIA NIMs (optimized inference)
+  - Other models (Llama, Mistral, Claude, etc.)
+  - Custom fine-tuned models
+- **Enterprise Features**: Built-in governance, compliance, and performance optimization
+
+**Governance & Monitoring:**
+- **IBM watsonx.governance**: AI lifecycle management
+  - Model monitoring and drift detection
+  - Compliance tracking and audit trails
+  - Risk management and bias detection
+  - Unified governance across all data sources and AI models
+- **IBM Instana**: Application performance monitoring
+- **OpenTelemetry**: Distributed tracing across the RAG pipeline
+
+#### Key Benefits
+
+1. **Unified Platform**: Single lakehouse consolidates vector databases, metadata stores, object storage, and streaming data
+2. **Simplified Integration**: Native connectors for Cassandra, OpenSearch, Kafka, and traditional databases reduce complexity
+3. **Cost Optimization**: Open table formats (Iceberg, Hudi, Delta Lake) and efficient storage reduce infrastructure costs by 40-60%
+4. **Enterprise Governance**: Single governance layer across all data sources and AI models with comprehensive audit trails
+5. **Query Federation**: Query across heterogeneous data sources with a single interface, eliminating data silos
+6. **Flexibility & Choice**: Works with existing tools while providing integrated alternatives; supports multiple LLM providers
+7. **Enterprise Support**: Comprehensive support and SLAs for production deployments with proven scalability
+8. **Performance at Scale**: Multi-engine support (Presto, Spark) optimized for diverse RAG workloads
+
+#### Implementation Considerations
+
+**When to Choose watsonx.data:**
+- **When you need to maximize business value from ALL your enterprise data** - watsonx.data unifies access to structured, unstructured, and streaming data
+- Enterprise organizations requiring unified governance and compliance
+- Multi-cloud or hybrid cloud deployments needing consistent data access
+- Teams seeking to reduce integration complexity and operational overhead
+- Organizations with diverse data sources requiring query federation
+- Projects requiring enterprise-grade support and SLAs
+
+**Migration Path:**
+- Start with watsonx.data as the unified lakehouse layer
+- Integrate existing vector databases (OpenSearch, Milvus) via native connectors
+- Migrate metadata to Cassandra/AstraDB for unified management
+- Leverage open table formats for cost optimization
+- Add watsonx.ai for LLM hosting with governance built-in
 
 ---
 
