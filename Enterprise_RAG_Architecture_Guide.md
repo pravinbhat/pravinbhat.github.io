@@ -590,7 +590,66 @@ graph TD
 - **HyDE (Hypothetical Document Embeddings)**: Generate hypothetical answer document, embed it for better retrieval
 - **Query Routing**: Route to specialized retrievers based on intent classification
 
-### 2. Pre-Filtering - Metadata & Access Control
+### 2. Semantic Caching
+
+Cache retrieval results for repeated/similar queries using semantic similarity.
+
+```mermaid
+graph TB
+    Query[User Query]
+    
+    Query --> L1{L1: Embedding<br/>Cache}
+    L1 -->|Hit| L2
+    L1 -->|Miss| E1[Generate Embedding]
+    E1 --> Store1[Store in L1<br/>Configurable TTL]
+    Store1 --> L2
+    
+    L2{L2: Semantic<br/>Cache}
+    L2 -->|Hit| Return[Return Cached<br/>Results]
+    L2 -->|Miss| Search[Vector Search]
+    
+    Search --> Rerank[Reranking]
+    Rerank --> Store2[Store in L2<br/>Configurable TTL]
+    Store2 --> Return
+    
+    style Query fill:#e1f5ff
+    style Return fill:#e8f5e9
+    style L1 fill:#ffe1e1
+    style L2 fill:#ffe1e1
+```
+
+#### Caching Layers
+
+**1. Query Embedding Cache**
+- Cache expensive embedding computations
+- Configurable time-to-live (TTL)
+- High hit rate for repeated queries
+
+**2. Vector Search Results Cache**
+- Cache raw search results
+- Configurable TTL based on data freshness requirements
+- Saves expensive vector search
+
+**3. Final Results Cache**
+- Cache processed, reranked results
+- Configurable TTL balancing freshness and performance
+- Saves entire pipeline
+
+#### Benefits
+
+- **Performance**: 10-100x faster for cache hits
+- **Consistency**: Similar queries = same results
+- **Cost Reduction**: Fewer API calls
+- **Reliability**: Reduces dependency on external services
+
+#### Cache Invalidation
+
+- Time-based (TTL)
+- Content-based (when documents updated)
+- Manual (for urgent updates)
+- Version-based (when models change)
+
+### 3. Pre-Filtering - Metadata & Access Control
 
 Pre-filtering is a huge performance optimization that reduces search space before expensive vector operations.
 
@@ -629,7 +688,7 @@ Dramatic performance improvement with effective pre-filtering
 - Quality thresholds (minimum quality score)
 - Compliance requirements (retention policies)
 
-### 3. Hybrid Search - Vector + Keyword
+### 4. Hybrid Search - Vector + Keyword
 
 Hybrid search is the gold standard for production RAG systems, combining the strengths of both semantic and lexical search.
 
@@ -692,7 +751,7 @@ Best of both worlds: semantic understanding + keyword matching
 - **Cascade**: Vector search first, keyword as fallback
 - **Parallel**: Run both, merge top results
 
-### 4. Post-Retrieval Processing
+### 5. Post-Retrieval Processing
 
 #### Similarity Thresholding
 
@@ -786,64 +845,6 @@ Adjust relevance scores based on business metadata and feedback after semantic r
 **Benefits:**
 Balances semantic relevance with business priorities
 
-### 5. Semantic Caching
-
-Cache retrieval results for repeated/similar queries using semantic similarity.
-
-```mermaid
-graph TB
-    Query[User Query]
-    
-    Query --> L1{L1: Embedding<br/>Cache}
-    L1 -->|Hit| L2
-    L1 -->|Miss| E1[Generate Embedding]
-    E1 --> Store1[Store in L1<br/>Configurable TTL]
-    Store1 --> L2
-    
-    L2{L2: Semantic<br/>Cache}
-    L2 -->|Hit| Return[Return Cached<br/>Results]
-    L2 -->|Miss| Search[Vector Search]
-    
-    Search --> Rerank[Reranking]
-    Rerank --> Store2[Store in L2<br/>Configurable TTL]
-    Store2 --> Return
-    
-    style Query fill:#e1f5ff
-    style Return fill:#e8f5e9
-    style L1 fill:#ffe1e1
-    style L2 fill:#ffe1e1
-```
-
-#### Caching Layers
-
-**1. Query Embedding Cache**
-- Cache expensive embedding computations
-- Configurable time-to-live (TTL)
-- High hit rate for repeated queries
-
-**2. Vector Search Results Cache**
-- Cache raw search results
-- Configurable TTL based on data freshness requirements
-- Saves expensive vector search
-
-**3. Final Results Cache**
-- Cache processed, reranked results
-- Configurable TTL balancing freshness and performance
-- Saves entire pipeline
-
-#### Benefits
-
-- **Performance**: 10-100x faster for cache hits
-- **Consistency**: Similar queries = same results
-- **Cost Reduction**: Fewer API calls
-- **Reliability**: Reduces dependency on external services
-
-#### Cache Invalidation
-
-- Time-based (TTL)
-- Content-based (when documents updated)
-- Manual (for urgent updates)
-- Version-based (when models change)
 
 ### 6. Context Assembly & Prompt Engineering
 
