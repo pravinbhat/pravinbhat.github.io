@@ -144,8 +144,8 @@ graph TB
         subgraph "PHASE 4: RETRIEVAL & GENERATION"
             Query[User Query]
             QueryProc[Query Processing<br/>Clean, Expand, Embed]
-            HybridSearch[Hybrid Search<br/>Vector + Keyword]
             PreFilter[Pre-Filtering<br/>Metadata, Access Control]
+            HybridSearch[Hybrid Search<br/>Vector + Keyword]
             PostProc[Post-Processing<br/>Threshold, Dedup, Rerank, Boost]
             SemanticCache[Semantic Caching<br/>Query, Result, Embedding Cache]
             Context[Context Assembly<br/>Prompt Engineering]
@@ -154,11 +154,11 @@ graph TB
             
             Query --> QueryProc
             QueryProc --> SemanticCache
-            SemanticCache -->|Cache Miss| HybridSearch
+            SemanticCache -->|Cache Miss| PreFilter
             SemanticCache -->|Cache Hit| Context
-            HybridSearch --> PreFilter
-            PreFilter --> VectorDB
-            PreFilter --> MetadataDB
+            PreFilter --> HybridSearch
+            HybridSearch --> VectorDB
+            HybridSearch --> MetadataDB
             VectorDB --> PostProc
             PostProc --> Context
             Context --> LLM
@@ -210,8 +210,8 @@ The architecture operates through two distinct pipelines: an **offline pipeline*
 
 **PHASE 4: RETRIEVAL & GENERATION**
 - Query Processing (Clean, Expand, Embed)
-- Hybrid Search (Vector + Keyword)
 - Pre-Filtering (Metadata, Access Control)
+- Hybrid Search (Vector + Keyword)
 - Post-Retrieval Processing (Threshold, Deduplication, Reranking, Boosting)
 - Semantic Caching (Query, Result, Embedding Cache)
 - Context Assembly & Prompt Engineering
