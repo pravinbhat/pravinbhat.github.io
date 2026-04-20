@@ -332,15 +332,15 @@ Enrichment Pipeline → Vector DB Update
 
 ### Best Practices
 
-- ✅ Implement quality gates early to prevent wasting resources on bad data
-- ✅ Use tiered validation (fast checks first, expensive checks later)
-- ✅ Log all processing steps and validation failures for debugging and audit
-- ✅ Monitor processing metrics (throughput, error rates, latency, validation pass rates)
-- ✅ Handle failures gracefully with retries and dead-letter queues
-- ✅ Balance validation strictness with data coverage needs
-- ✅ Version control for processing logic and configurations
-- ✅ Consider incremental updates vs full reprocessing based on data freshness requirements
-- ✅ Implement circuit breakers for external dependencies
+- Implement quality gates early to prevent wasting resources on bad data
+- Use tiered validation (fast checks first, expensive checks later)
+- Log all processing steps and validation failures for debugging and audit
+- Monitor processing metrics (throughput, error rates, latency, validation pass rates)
+- Handle failures gracefully with retries and dead-letter queues
+- Balance validation strictness with data coverage needs
+- Version control for processing logic and configurations
+- Consider incremental updates vs full reprocessing based on data freshness requirements
+- Implement circuit breakers for external dependencies
 
 ---
 
@@ -421,11 +421,11 @@ Dense vector representations of text that capture semantic meaning in high-dimen
 
 #### Best Practices
 
-- ✅ Use same model for documents and queries (critical!)
-- ✅ Batch embed documents for efficiency
-- ✅ Cache embeddings aggressively (they don't change)
-- ✅ Version control your embedding model
-- ✅ Monitor embedding costs at scale
+- Use same model for documents and queries (critical!)
+- Batch embed documents for efficiency
+- Cache embeddings aggressively (they don't change)
+- Version control your embedding model
+- Monitor embedding costs at scale
 
 ### Metadata Extraction
 
