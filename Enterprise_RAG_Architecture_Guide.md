@@ -394,22 +394,10 @@ Dense vector representations of text that capture semantic meaning in high-dimen
 
 #### Key Considerations
 
-**Dimension Size**: Higher dimensions = more accurate, but slower and more storage
-- 384-768 dimensions: Fast, good for most use cases
-- 1024-1536 dimensions: Better accuracy, standard choice
-- 3072-4096 dimensions: Highest accuracy, slower and more expensive
-
-**Domain Specificity**: General-purpose vs domain-specific models
-- General: Good for diverse content
-- Domain-specific: Better for specialized content (legal, medical, code)
-
-**Language Support**: Multilingual vs single-language models
-- Multilingual: Support multiple languages in one model
-- Single-language: Better performance for specific language
-
-**Cost**: API-based vs self-hosted
-- API-based: Easy to start, pay per use
-- Self-hosted: Higher upfront cost, lower long-term cost at scale
+- **Dimension Size**: Higher dimensions = more accurate, but slower and more storage
+- **Domain Specificity**: General-purpose vs domain-specific models
+- **Language Support**: Multilingual vs single-language models
+- **Cost**: API-based vs self-hosted
 
 #### Model Options
 
@@ -440,25 +428,10 @@ Metadata is the secret weapon for RAG accuracy:
 
 #### Metadata Types
 
-**1. Structural Metadata**
-- Document ID, filename, file type, page count
-- Creation/modification dates, author, owner
-- Document size, word count, language
-
-**2. Content Metadata**
-- Language, document type, topics, categories
-- Named entities (people, places, organizations)
-- Keywords, tags, classifications
-
-**3. Business Metadata**
-- Source system, business unit, department
-- Confidentiality level, retention policy
-- Approval status, version information
-
-**4. Quality Metadata**
-- Confidence scores, processing status
-- Validation flags, error indicators
-- Extraction timestamps, processing duration
+- **Structural Metadata**: Document ID, filename, file type, dates, author, page count, size, language
+- **Content Metadata**: Document type, topics, categories, named entities (people, places), keywords, tags
+- **Business Metadata**: Source system, business unit, confidentiality, retention policy, version info
+- **Quality Metadata**: Confidence scores, validation flags, error indicators, extraction timestamps
 
 #### Extraction Techniques
 
@@ -555,15 +528,15 @@ graph TD
     D -->|Miss| C1[Generate Embedding]
     C1 --> E
     E -->|Hit| M[Context Assembly<br/>Format chunks into LLM prompt]
-    E -->|Miss| F[Hybrid Search]
+    E -->|Miss| F[Pre-Filtering<br/>Metadata + Access Control]
     
-    F --> G[Vector Search<br/>ANN Algorithm]
-    F --> H[Keyword Search<br/>BM25]
+    F --> G[Hybrid Search]
+    G --> H[Vector Search<br/>ANN Algorithm]
+    G --> I[Keyword Search<br/>BM25]
     
-    G --> I[Fusion<br/>RRF/Weighted]
-    H --> I
+    H --> J[Fusion<br/>RRF/Weighted]
+    I --> J
     
-    I --> J[Pre-Filtering<br/>Metadata + Access Control]
     J --> K[Post-Search Filtering<br/>Similarity Threshold]
     K --> L[Deduplication<br/>By File/Content/Hash]
     L --> N[Reranking<br/>Cross-Encoder Model]
@@ -617,7 +590,46 @@ graph TD
 - **HyDE (Hypothetical Document Embeddings)**: Generate hypothetical answer document, embed it for better retrieval
 - **Query Routing**: Route to specialized retrievers based on intent classification
 
-### 2. Hybrid Search - Vector + Keyword
+### 2. Pre-Filtering - Metadata & Access Control
+
+Pre-filtering is a huge performance optimization that reduces search space before expensive vector operations.
+
+#### Why Pre-Filter?
+
+- Reduce search space before expensive vector search
+- Enforce access control and business rules
+- Improve relevance by scoping results
+- Reduce costs (fewer vectors to compare)
+
+#### Performance Impact Example
+
+- **Without Pre-Filtering**: Search 1M vectors → retrieve 100 → filter to 10 (100% search space)
+- **With Pre-Filtering**: Filter to 100K vectors → search → retrieve 100 (90% reduction in search space)
+- **Result**: 10x faster search, lower latency, reduced costs
+
+Dramatic performance improvement with effective pre-filtering
+
+#### Filter Types
+
+**Metadata Filters:**
+- date_created >= "2024-01-01"
+- document_type in ["pdf", "docx"]
+- department = "engineering"
+- status != "archived"
+
+**Access Control Filters:**
+- User permissions (RBAC - Role-Based Access Control)
+- ABAC (Attribute-Based Access Control) for fine-grained control
+- Data classification levels (public, confidential, secret)
+- Geographic restrictions (data residency requirements)
+
+**Business Rule Filters:**
+- Active/inactive status
+- Version control (latest only)
+- Quality thresholds (minimum quality score)
+- Compliance requirements (retention policies)
+
+### 3. Hybrid Search - Vector + Keyword
 
 Hybrid search is the gold standard for production RAG systems, combining the strengths of both semantic and lexical search.
 
@@ -680,45 +692,6 @@ Best of both worlds: semantic understanding + keyword matching
 - **Cascade**: Vector search first, keyword as fallback
 - **Parallel**: Run both, merge top results
 
-### 3. Pre-Filtering - Metadata & Access Control
-
-Pre-filtering is a huge performance optimization that reduces search space before expensive vector operations.
-
-#### Why Pre-Filter?
-
-- Reduce search space before expensive vector search
-- Enforce access control and business rules
-- Improve relevance by scoping results
-- Reduce costs (fewer vectors to compare)
-
-#### Performance Impact Example
-
-- **Without Pre-Filtering**: Search 1M vectors → retrieve 100 → filter to 10 (100% search space)
-- **With Pre-Filtering**: Filter to 100K vectors → search → retrieve 100 (90% reduction in search space)
-- **Result**: 10x faster search, lower latency, reduced costs
-
-Dramatic performance improvement with effective pre-filtering
-
-#### Filter Types
-
-**Metadata Filters:**
-- date_created >= "2024-01-01"
-- document_type in ["pdf", "docx"]
-- department = "engineering"
-- status != "archived"
-
-**Access Control Filters:**
-- User permissions (RBAC - Role-Based Access Control)
-- ABAC (Attribute-Based Access Control) for fine-grained control
-- Data classification levels (public, confidential, secret)
-- Geographic restrictions (data residency requirements)
-
-**Business Rule Filters:**
-- Active/inactive status
-- Version control (latest only)
-- Quality thresholds (minimum quality score)
-- Compliance requirements (retention policies)
-
 ### 4. Post-Retrieval Processing
 
 #### Similarity Thresholding
@@ -769,9 +742,9 @@ Crucial for efficient LLM context usage:
    - Handles copy-paste scenarios
 
 **Benefits:**
-- ✅ Reduces redundancy
-- ✅ Increases context diversity
-- ✅ Optimizes token usage
+- Reduces redundancy
+- Increases context diversity
+- Optimizes token usage
 
 #### Reranking
 
@@ -794,10 +767,10 @@ Second-stage ranking after initial retrieval using more sophisticated models.
 - BGE Reranker (BAAI): Open source, good performance
 
 **Best Practices:**
-- ✅ Retrieve more candidates than needed (over-fetch)
-- ✅ Typical ratio: retrieve 50-100, rerank to 10-20
-- ✅ Cache reranking results
-- ✅ Monitor reranking latency and accuracy
+- Retrieve more candidates than needed (over-fetch)
+- Typical ratio: retrieve 50-100, rerank to 10-20
+- Cache reranking results
+- Monitor reranking latency and accuracy
 
 #### Boosting
 
@@ -860,10 +833,10 @@ graph TB
 
 #### Benefits
 
-- ✅ **Performance**: 10-100x faster for cache hits
-- ✅ **Consistency**: Similar queries = same results
-- ✅ **Cost Reduction**: Fewer API calls
-- ✅ **Reliability**: Reduces dependency on external services
+- **Performance**: 10-100x faster for cache hits
+- **Consistency**: Similar queries = same results
+- **Cost Reduction**: Fewer API calls
+- **Reliability**: Reduces dependency on external services
 
 #### Cache Invalidation
 
@@ -950,12 +923,6 @@ graph TB
         Metrics --> Dashboard[Monitoring Dashboard<br/>IBM Instana, Grafana]
         Logs --> Analysis[Log Analysis<br/>Error Patterns, Trends]
         Traces --> Debug[Performance Debugging<br/>Bottleneck Identification]
-    end
-    
-    subgraph "Alerting & Analysis"
-        Dashboard --> Alerts[Alert Manager<br/>PagerDuty, Slack]
-        Governance --> Analysis[AI Quality Analysis<br/>Model Drift, Bias Detection]
-        Instana --> Debug[Performance Debugging<br/>Bottleneck Identification]
     end
     
     style API fill:#e1f5ff
