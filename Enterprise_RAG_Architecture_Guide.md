@@ -8,12 +8,12 @@
 3. [What is RAG?](#what-is-rag)
 4. [Enterprise RAG Use Cases](#enterprise-rag-use-cases)
 5. [RAG Reference Architecture](#rag-reference-architecture)
-6. [Data Flow Overview](#data-flow-overview)
-7. [Phase 1: Data Ingestion](#phase-1-data-ingestion)
-8. [Phase 2: Data Enrichment](#phase-2-data-enrichment)
-9. [Phase 3: Storage Architecture](#phase-3-storage-architecture)
-10. [Phase 4: Retrieval & Generation Pipeline](#phase-4-retrieval--generation-pipeline)
-11. [Phase 5: Observability & Monitoring](#phase-5-observability--monitoring)
+6. [Phase 1: Data Ingestion](#phase-1-data-ingestion)
+7. [Phase 2: Data Enrichment](#phase-2-data-enrichment)
+8. [Phase 3: Storage Architecture](#phase-3-storage-architecture)
+9. [Phase 4: Retrieval & Generation Pipeline](#phase-4-retrieval--generation-pipeline)
+10. [Phase 5: Observability & Monitoring](#phase-5-observability--monitoring)
+11. [Technology Stack Recommendation](#technology-stack-recommendation)
 
 ---
 
