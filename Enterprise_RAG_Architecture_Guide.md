@@ -124,13 +124,10 @@ graph TB
             Chunking[Chunking Strategy<br/>Fixed, Semantic, Sliding Window, Hierarchical]
             Embedding[Embedding Generation<br/>IBM Granite, OpenAI, Cohere, NVIDIA NIMs]
             Metadata[Metadata Extraction<br/>NER, Classification, Tagging]
-            QualityCheck[Quality Validation<br/>Completeness, Accuracy]
             
             Validation --> Chunking
             Chunking --> Embedding
             Chunking --> Metadata
-            Embedding --> QualityCheck
-            Metadata --> QualityCheck
         end
         
         subgraph "PHASE 3: STORAGE"
@@ -205,7 +202,6 @@ The architecture operates through two distinct pipelines: an **offline pipeline*
 - Chunking Strategy (Fixed, Semantic, Sliding Window, Hierarchical)
 - Embedding Generation (watsonx.ai: IBM Granite, OpenAI, Cohere, NVIDIA NIMs)
 - Metadata Extraction (NER, Classification, Tagging)
-- Quality Validation
 
 **PHASE 3: STORAGE**
 - Vector Database (watsonx.data: OpenSearch, AstraDB, Milvus, Qdrant)
@@ -305,14 +301,32 @@ This real-time component complements batch ingestion, allowing you to balance th
 
 ### Data Processing Pipeline
 
-#### 1. Validation
+#### 1. Data Validation & Quality Gates
 
-Prevent bad data from entering the system:
+Prevent bad data from entering the system through comprehensive quality gates:
 
+**Quality Gates:**
 - **File integrity checks**: Detect corrupted or incomplete files
 - **Format validation**: Ensure parsers can handle the file type
-- **Content quality assessment**: Filter out low-quality or empty content
+- **Content quality assessment**: Filter out low-quality or empty content (minimum length, coherence, completeness)
 - **Virus/malware scanning**: Security best practice for uploaded content
+- **Encoding validation**: Ensure proper UTF-8 encoding to prevent downstream issues
+- **Language detection**: Filter or route content based on language requirements
+- **PII/sensitive data detection**: Flag or redact personally identifiable information for compliance (GDPR, HIPAA)
+- **Content policy checks**: Validate against organizational content policies and regulatory requirements
+
+**Deduplication:**
+- **Content-based hashing**: Use MD5/SHA256 for exact duplicate detection
+- **Fuzzy matching**: Detect near-duplicates and different versions of same document
+- **Version control**: Keep latest version, archive or discard older versions
+- **Cross-source deduplication**: Identify same content from multiple sources
+
+**Best Practices:**
+- ✅ Implement quality gates early to prevent wasting resources on bad data
+- ✅ Use tiered validation (fast checks first, expensive checks later)
+- ✅ Log all validation failures with reasons for continuous improvement
+- ✅ Monitor validation pass rates and adjust thresholds based on data quality
+- ✅ Balance validation strictness with data coverage needs
 
 #### 2. Normalization
 
