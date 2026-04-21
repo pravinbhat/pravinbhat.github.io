@@ -148,22 +148,18 @@ LLM-only systems, while powerful, cannot access enterprise-specific knowledge or
 
 RAG solves both traditional search and LLM-only limitations by combining retrieval and generation in a unified pipeline to produce accurate, grounded responses.
 
-### How RAG Addresses the Challenges
+### Comparison: Why RAG is Superior
 
-**Solving Traditional Search Problems:**
-- ✅ **Semantic Understanding**: Uses vector embeddings to understand meaning, not just keywords
-- ✅ **Context-Aware**: Captures user intent and contextual nuances
-- ✅ **Synonym Handling**: "automobile" and "car" are semantically similar in vector space
-- ✅ **Relevance Ranking**: Results ranked by semantic similarity, not keyword frequency
+| Feature | Traditional Search | LLM-Only | RAG |
+|---------|-------------------|----------|-----|
+| **Understanding** | ❌ Keyword matching only | ✅ Semantic understanding | ✅ Semantic understanding |
+| **Accuracy** | ⚠️ Returns documents only | ❌ May hallucinate | ✅ Grounded in real documents |
+| **Currency** | ✅ Always current | ❌ Training cutoff date | ✅ Always current |
+| **Source Attribution** | ✅ Document references | ❌ No citations | ✅ Cites sources |
+| **Answer Quality** | ❌ No direct answers | ✅ Natural language | ✅ Natural language + sources |
+| **Updates** | ✅ Add documents | ❌ Expensive retraining | ✅ Add documents |
 
-**Solving LLM-Only Problems:**
-- ✅ **Grounded Responses**: Answers based on retrieved documents, reducing hallucinations
-- ✅ **Current Information**: Accesses up-to-date knowledge base without model retraining
-- ✅ **Source Attribution**: Can cite specific documents and passages
-- ✅ **Domain Expertise**: Leverages enterprise-specific and proprietary data
-- ✅ **Consistent Answers**: Responses grounded in factual sources
-
-> **💡 Key Insight**: RAG doesn't replace traditional search or LLMs—it combines their strengths while mitigating their weaknesses, creating a more powerful and reliable system.
+> **💡 Key Insight**: RAG combines semantic understanding with factual grounding, delivering accurate, verifiable, and up-to-date responses without expensive model retraining.
 
 ---
 
