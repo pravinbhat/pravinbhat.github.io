@@ -7,89 +7,31 @@
 ## Table of Contents
 
 1. [Introduction](#-introduction)
-2. [The Challenge: Traditional Search Limitations](#️-the-challenge-traditional-search-limitations)
-3. [What is RAG?](#-what-is-rag)
-4. [Enterprise RAG Use Cases](#-enterprise-rag-use-cases)
-5. [RAG Reference Architecture](#️-rag-reference-architecture)
-6. [Phase 1: Data Ingestion](#-phase-1-data-ingestion)
-7. [Phase 2: Data Enrichment](#️-phase-2-data-enrichment)
-8. [Phase 3: Storage Architecture](#-phase-3-storage-architecture)
-9. [Phase 4: Retrieval & Generation Pipeline](#-phase-4-retrieval--generation-pipeline)
-10. [Phase 5: Observability & Monitoring](#-phase-5-observability--monitoring)
-11. [Technology Stack Recommendation](#️-technology-stack-recommendation)
+2. [Enterprise RAG Use Cases](#-enterprise-rag-use-cases)
+3. [RAG Reference Architecture](#️-rag-reference-architecture)
+4. [Phase 1: Data Ingestion](#-phase-1-data-ingestion)
+5. [Phase 2: Data Enrichment](#️-phase-2-data-enrichment)
+6. [Phase 3: Storage Architecture](#-phase-3-storage-architecture)
+7. [Phase 4: Retrieval & Generation Pipeline](#-phase-4-retrieval--generation-pipeline)
+8. [Phase 5: Observability & Monitoring](#-phase-5-observability--monitoring)
+9. [Technology Stack Recommendation](#️-technology-stack-recommendation)
 
 ---
 
 ## 📖 Introduction
 
-Retrieval-Augmented Generation (RAG) represents a paradigm shift in how enterprises leverage their knowledge bases with Large Language Models (LLMs). This comprehensive guide provides a detailed technical architecture for implementing enterprise-grade AI search systems using RAG, covering everything from data ingestion to production monitoring.
+This comprehensive guide provides detailed technical architecture for implementing production-ready RAG systems in enterprise environments, covering the complete pipeline from data ingestion to monitoring and observability.
 
-> **📚 New to RAG?** If you're looking for a conceptual overview of why RAG is important and how it compares to traditional search and LLM-only approaches, start with **[Why RAG?](Why_RAG.md)**. This guide focuses on the technical implementation details, while the Why RAG document explains the foundational concepts and business value.
+### Prerequisites
 
----
+**📚 Start with Why RAG?** - Before diving into implementation details, ensure you understand the foundational concepts by reading **[Why RAG?](Why_RAG.md)**, which covers:
+- Traditional search limitations and business impact
+- LLM-only approach risks and challenges
+- What RAG is and how it solves both problems
+- Key benefits and comparison with other approaches
+- High-level RAG system architecture
 
-## ⚠️ The Challenge: Traditional Search Limitations
-
-### Traditional Search Problems
-
-Traditional enterprise search systems face fundamental limitations that impact business operations:
-
-- **Keyword matching only** - Misses semantic meaning and context
-- **No understanding of context or intent** - Cannot interpret user needs beyond literal terms
-- **Poor handling of synonyms and variations** - "automobile" won't find "car"
-- **Limited by exact term matches** - Requires users to know exact terminology
-- **No ranking by relevance** - Results ranked by keyword frequency, not actual relevance
-
-### Business Impact
-
-These limitations translate directly into business costs:
-
-- Users cannot find relevant information efficiently
-- Low productivity and user frustration
-- Missed insights and business opportunities
-- Poor customer experience and satisfaction
-
-Traditional search engines trap enterprise knowledge in documents that cannot be effectively searched, leading to information silos and lost productivity.
-
----
-
-## 🤖 What is RAG?
-
-### Retrieval-Augmented Generation
-
-RAG is a technique that combines information retrieval with generative AI to produce accurate, grounded responses. It addresses the fundamental "hallucination" problem of LLMs by grounding responses in actual enterprise data.
-
-### The 3-Step RAG Process
-
-```
-1. 🔎 Retrieve  → relevant information from your knowledge base
-2. 📝 Augment   → the LLM prompt with retrieved context
-3. ✨ Generate  → accurate, grounded responses with citations
-```
-
-### Key Benefits
-
-RAG offers significant advantages over traditional approaches:
-
-- ✅ **Semantic understanding of queries** - Understands intent, not just keywords
-- ✅ **Answers grounded in your data** - Responses based on actual documents, not hallucinated
-- ✅ **Always up-to-date** - No model retraining needed when data changes
-- ✅ **Transparent with source citations** - Every answer traceable to source documents
-- ✅ **Cost-effective vs fine-tuning** - Much cheaper than retraining models
-- ✅ **Works with private/proprietary data** - Keeps sensitive data secure
-
-### RAG vs Fine-Tuning
-
-Understanding the difference is crucial for architecture decisions:
-
-| Aspect | RAG | Fine-Tuning |
-|--------|-----|-------------|
-| **Knowledge** | Dynamic, always current | Static, baked into weights |
-| **Updates** | Instant, cost-effective | Requires expensive retraining |
-| **Transparency** | Transparent sources | Black box |
-| **Best For** | Frequently changing data | Specialized tasks/style |
-
-> **💡 Key Insight**: RAG keeps knowledge separate and queryable, while fine-tuning embeds it in model parameters. For enterprise use cases with frequently changing data, RAG is typically the superior choice.
+This guide assumes familiarity with those concepts and focuses exclusively on the "how" - providing detailed implementation architecture, best practices, and technology recommendations.
 
 ---
 
