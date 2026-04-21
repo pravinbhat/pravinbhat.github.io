@@ -24,6 +24,8 @@
 
 Retrieval-Augmented Generation (RAG) represents a paradigm shift in how enterprises leverage their knowledge bases with Large Language Models (LLMs). This comprehensive guide provides a detailed technical architecture for implementing enterprise-grade AI search systems using RAG, covering everything from data ingestion to production monitoring.
 
+> **📚 New to RAG?** If you're looking for a conceptual overview of why RAG is important and how it compares to traditional search and LLM-only approaches, start with **[Why RAG?](Why_RAG.md)**. This guide focuses on the technical implementation details, while the Why RAG document explains the foundational concepts and business value.
+
 ---
 
 ## ⚠️ The Challenge: Traditional Search Limitations
