@@ -10,6 +10,14 @@
 
 ---
 
+## Introduction
+
+Enterprise search and information retrieval have evolved significantly, yet organizations still struggle to provide accurate, contextual answers to user queries. Traditional keyword-based search systems miss semantic meaning, while standalone AI models can hallucinate or provide outdated information.
+
+**Retrieval-Augmented Generation (RAG)** represents a breakthrough approach that combines the best of both worlds: the semantic understanding of Large Language Models with the factual grounding of enterprise knowledge bases. This document explores why RAG has become the preferred architecture for enterprise AI search systems.
+
+---
+
 ## The Challenge: Traditional Search Limitations
 
 Traditional enterprise search has fundamental limitations:
@@ -100,6 +108,31 @@ graph TB
     style LLMOnly fill:#f9f9f9,stroke:#333,stroke-width:2px
 ```
 
+---
+
+## The Solution: RAG (Retrieval-Augmented Generation)
+
+RAG solves both traditional search and LLM-only limitations by combining retrieval and generation in a unified pipeline to produce accurate, grounded responses:
+
+### How RAG Addresses the Challenges
+
+**Solving Traditional Search Problems:**
+- ✅ **Semantic Understanding**: Uses vector embeddings to understand meaning, not just keywords
+- ✅ **Context-Aware**: Captures user intent and contextual nuances
+- ✅ **Synonym Handling**: "automobile" and "car" are semantically similar in vector space
+- ✅ **Relevance Ranking**: Results ranked by semantic similarity, not keyword frequency
+
+**Solving LLM-Only Problems:**
+- ✅ **Grounded Responses**: Answers based on retrieved documents, reducing hallucinations
+- ✅ **Current Information**: Accesses up-to-date knowledge base without model retraining
+- ✅ **Source Attribution**: Can cite specific documents and passages
+- ✅ **Domain Expertise**: Leverages enterprise-specific and proprietary data
+- ✅ **Consistent Answers**: Responses grounded in factual sources
+
+> **💡 Key Insight**: RAG doesn't replace traditional search or LLMs—it combines their strengths while mitigating their weaknesses, creating a more powerful and reliable system.
+
+---
+
 ## High-Level RAG System Architecture
 
 ```mermaid
@@ -137,11 +170,25 @@ graph TB
 
 ## Key Benefits of RAG
 
-- **Up-to-date Information**: Access to current data without retraining the model
-- **Reduced Hallucinations**: Grounded responses based on actual documents
-- **Transparency**: Ability to cite sources and verify information
-- **Cost-Effective**: No need for expensive model fine-tuning
-- **Domain-Specific Knowledge**: Easy integration of specialized information
+### 1. Up-to-date Information
+Access current data without retraining the model.
+
+**Example**: A financial services company can update their RAG system with the latest regulatory changes, market data, or product information simply by adding new documents to the knowledge base.
+
+### 2. Reduced Hallucinations and increased Transparency
+Grounded responses based on actual documents.
+
+**Example**: When asked about company policies, the RAG system retrieves the actual policy document and generates answers based on that content, rather than making up plausible-sounding but incorrect information.
+
+### 3. Cost-Effective
+No need for expensive model fine-tuning or retraining.
+
+**Example**: Instead of fine-tuning an LLM (expensive and time consuming), organizations can simply update their document repository to reflect new information.
+
+### 4. Domain-Specific Knowledge
+Easy integration of specialized enterprise information.
+
+**Example**: A manufacturing company can integrate technical manuals, safety procedures, maintenance logs, and proprietary engineering documents into their RAG system, providing employees with instant access to specialized knowledge that general-purpose LLMs don't possess.
 
 
 ---
