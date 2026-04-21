@@ -1,0 +1,157 @@
+# Why RAG (Retrieval-Augmented Generation)?
+
+## Table of Contents
+
+1. [The Challenge: Traditional Search Limitations](#the-challenge-traditional-search-limitations)
+2. [The Challenge: AI/LLM-Only Search Limitations](#the-challenge-aillm-only-search-limitations)
+3. [High-Level RAG System Architecture](#high-level-rag-system-architecture)
+4. [RAG System Flow](#rag-system-flow)
+5. [Key Benefits of RAG](#key-benefits-of-rag)
+
+---
+
+## The Challenge: Traditional Search Limitations
+
+Traditional enterprise search has fundamental limitations:
+
+- **Keyword matching only**
+  - Misses semantic meaning and context
+
+- **No understanding of context or intent**
+  - Cannot interpret beyond literal terms
+
+- **Poor handling of synonyms and variations**
+  - "automobile" won't find "car"
+
+- **No ranking by relevance**
+  - Ranked by keyword frequency, not relevance
+
+### Traditional Search Architecture
+
+```mermaid
+graph TB
+    User[👤 User Query]
+    SearchDB[(📁 Document Database)]
+    
+    subgraph Traditional["Traditional Search System"]
+        direction TB
+        KeywordMatch[🔤 Keyword Matching]
+        Ranking[📊 Frequency Ranking]
+    end
+    
+    Results[📄 Search Results]
+    
+    User -->|1. Submit Keywords| KeywordMatch
+    SearchDB -.->|2. Exact Match Lookup| KeywordMatch
+    KeywordMatch -->|3. Frequency Count| Ranking
+    Ranking -->|4. Return Results| Results
+    
+    style User fill:#4A90E2,stroke:#2E5C8A,color:#fff
+    style SearchDB fill:#95A5A6,stroke:#7F8C8D,color:#fff
+    style KeywordMatch fill:#E74C3C,stroke:#C0392B,color:#fff
+    style Ranking fill:#E67E22,stroke:#D35400,color:#fff
+    style Results fill:#BDC3C7,stroke:#95A5A6,color:#333
+    style Traditional fill:#f9f9f9,stroke:#333,stroke-width:2px
+```
+
+## The Challenge: AI/LLM-Only Search Limitations
+
+Using LLMs alone without retrieval also has significant drawbacks:
+
+- **Hallucinations and fabricated information**
+  - Models may generate plausible-sounding but incorrect answers
+  - No way to verify accuracy of responses
+
+- **Outdated knowledge**
+  - Training data has a cutoff date
+  - Cannot access recent information or updates
+
+- **No source attribution**
+  - Cannot cite or reference specific documents
+  - Difficult to verify or audit responses
+
+- **Limited domain-specific knowledge**
+  - General training may lack specialized enterprise data
+  - Cannot access proprietary or confidential information
+
+- **Inconsistent responses**
+  - Same question may yield different answers
+  - No grounding in factual data sources
+
+### AI/LLM-Only Search Architecture
+
+```mermaid
+graph TB
+    User[👤 User Query]
+    
+    subgraph LLMOnly["AI/LLM-Only System"]
+        direction TB
+        LLM[🤖 Large Language Model<br/>Parametric Memory Only]
+    end
+    
+    Response[💬 Generated Response<br/>⚠️ May Hallucinate]
+    
+    User -->|1. Submit Query| LLM
+    LLM -->|2. Generate from Training| Response
+    
+    style User fill:#4A90E2,stroke:#2E5C8A,color:#fff
+    style LLM fill:#E74C3C,stroke:#C0392B,color:#fff
+    style Response fill:#E67E22,stroke:#D35400,color:#fff
+    style LLMOnly fill:#f9f9f9,stroke:#333,stroke-width:2px
+```
+
+## High-Level RAG System Architecture
+
+```mermaid
+graph TB
+    User[👤 User Query]
+    VectorDB[(📊 Knowledge Base<br/>Vector Database)]
+    
+    subgraph RAG["RAG System Pipeline"]
+        direction TB
+        Retrieval[🔍 Retrieval Engine]
+        LLM[🤖 Large Language Model]
+    end
+    
+    Response[💬 Generated Response]
+    
+    User -->|1. Submit Query| Retrieval
+    VectorDB -.->|2. Fetch Context| Retrieval
+    Retrieval -->|3. Query + Context| LLM
+    LLM -->|4. Generate Answer| Response
+    
+    style User fill:#4A90E2,stroke:#2E5C8A,color:#fff
+    style VectorDB fill:#F5A623,stroke:#C17D11,color:#fff
+    style Retrieval fill:#7ED321,stroke:#5FA319,color:#fff
+    style LLM fill:#BD10E0,stroke:#8B0AA8,color:#fff
+    style Response fill:#50E3C2,stroke:#3AB09E,color:#fff
+    style RAG fill:#f9f9f9,stroke:#333,stroke-width:2px
+```
+
+## RAG System Flow
+
+1. **User submits a query** - The user asks a question or makes a request
+2. **Retrieval engine fetches relevant context** - The system searches the knowledge base for relevant information
+3. **Query and context are combined** - The original query is augmented with retrieved context
+4. **LLM generates contextually-aware answer** - The language model produces a response based on both the query and retrieved context
+
+## Key Benefits of RAG
+
+- **Up-to-date Information**: Access to current data without retraining the model
+- **Reduced Hallucinations**: Grounded responses based on actual documents
+- **Transparency**: Ability to cite sources and verify information
+- **Cost-Effective**: No need for expensive model fine-tuning
+- **Domain-Specific Knowledge**: Easy integration of specialized information
+
+
+---
+
+_**Author**: Pravin Bhat, Enterprise Solution Architect, IBM (Watsonx Data Labs)_
+
+_**Last Updated**: April 21st, 2026_
+
+_**Target Audience**: Technical Architects, Solution Architects, Engineering leaders, AI Developers_
+
+---
+
+_✨ Special thanks to [IBM BOB](https://bob.ibm.com/) for being my AI blog partner in crafting this guide! 🤖_
