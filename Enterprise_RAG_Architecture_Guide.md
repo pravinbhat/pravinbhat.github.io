@@ -111,69 +111,73 @@ The RAG architecture can be organized into multiple phases, each with specific r
 
 ```mermaid
 graph TB
-    subgraph "OFFLINE PIPELINE - Data Preparation"
-        subgraph "PHASE 1: DATA INGESTION"
-            Sources[Document Sources<br/>SharePoint, S3, Databases, APIs]
-            Parsers[File Parsers<br/>PDF, DOCX, HTML, Code]
-            Extractors[Content Extractors<br/>Text, Tables, Images, OCR]
-            Validation[Data Validation<br/>Quality Gates, Deduplication]
+    subgraph OfflinePipeline["🔄 OFFLINE PIPELINE - Data Preparation"]
+        direction TB
+        
+        subgraph Phase1["📥 PHASE 1: DATA INGESTION"]
+            Sources[📄 Document Sources<br/>SharePoint, S3, Databases, APIs]
+            Parsers[🔧 File Parsers<br/>PDF, DOCX, HTML, Code]
+            Extractors[📝 Content Extractors<br/>Text, Tables, Images, OCR]
+            Validation[✅ Data Validation<br/>Quality Gates, Deduplication]
             
             Sources --> Parsers
             Parsers --> Extractors
             Extractors --> Validation
         end
         
-        subgraph "PHASE 2: DATA ENRICHMENT"
-            Chunking[Chunking Strategy<br/>Fixed, Semantic, Sliding Window, Hierarchical]
-            Embedding[Embedding Generation<br/>IBM Granite, OpenAI, Cohere, NVIDIA NIMs]
-            Metadata[Metadata Extraction<br/>NER, Classification, Tagging]
+        subgraph Phase2["⚙️ PHASE 2: DATA ENRICHMENT"]
+            Chunking[✂️ Chunking Strategy<br/>Fixed, Semantic, Sliding Window, Hierarchical]
+            Embedding[🧬 Embedding Generation<br/>IBM Granite, OpenAI, Cohere, NVIDIA NIMs]
+            Metadata[🏷️ Metadata Extraction<br/>NER, Classification, Tagging]
             
             Validation --> Chunking
             Chunking --> Embedding
             Chunking --> Metadata
         end
         
-        subgraph "PHASE 3: STORAGE"
-            VectorDB[(Vector Database<br/>watsonx.data: OpenSearch, AstraDB, Milvus, Qdrant)]
-            MetadataDB[(Metadata Store<br/>watsonx.data: Cassandra, AstraDB, MongoDB)]
-            Cache[(Caching Layer<br/>Redis, Memcached)]
+        subgraph Phase3["💾 PHASE 3: STORAGE"]
+            VectorDB[(🗄️ Vector Database<br/>watsonx.data: OpenSearch<br/>AstraDB, Milvus, Qdrant)]
+            MetadataDB[(📊 Metadata Store<br/>watsonx.data: Cassandra<br/>AstraDB, MongoDB)]
+            CacheStore[(⚡ Caching Layer<br/>Redis, Memcached)]
             
             Embedding --> VectorDB
             Metadata --> MetadataDB
         end
     end
     
-    subgraph "ONLINE PIPELINE - Query Time"
-        subgraph "PHASE 4: RETRIEVAL & GENERATION"
-            Query[User Query]
-            QueryProc[Query Processing<br/>Clean, Expand, Embed]
-            PreFilter[Pre-Filtering<br/>Metadata, Access Control]
-            HybridSearch[Hybrid Search<br/>Vector + Keyword]
-            PostProc[Post-Processing<br/>Threshold, Dedup, Rerank, Boost]
-            SemanticCache[Semantic Caching<br/>Query, Result, Embedding Cache]
-            Context[Context Assembly<br/>Prompt Engineering]
-            LLM[LLM Generation<br/>watsonx.ai: IBM Granite, OpenAI, Cohere, NVIDIA NIMs]
-            Response[Answer + Citations]
+    subgraph OnlinePipeline["⚡ ONLINE PIPELINE - Query Time"]
+        direction TB
+        
+        subgraph Phase4["🔍 PHASE 4: RETRIEVAL & GENERATION"]
+            Query{{👤 User Query}}
+            QueryProc[🔄 Query Processing<br/>Clean, Expand, Embed]
+            SemanticCache{💨 Semantic Cache<br/>Query, Result, Embedding}
+            PreFilter[🔒 Pre-Filtering<br/>Metadata, Access Control]
+            HybridSearch[🔎 Hybrid Search<br/>Vector + Keyword]
+            PostProc[⚙️ Post-Processing<br/>Threshold, Dedup, Rerank, Boost]
+            Context[📋 Context Assembly<br/>Prompt Engineering]
+            LLM[🤖 LLM Generation<br/>watsonx.ai: IBM Granite<br/>OpenAI, Cohere, NVIDIA NIMs]
+            Response{{📤 Answer + Citations}}
             
             Query --> QueryProc
             QueryProc --> SemanticCache
             SemanticCache -->|Cache Miss| PreFilter
-            SemanticCache -->|Cache Hit| Context
+            SemanticCache -.->|Cache Hit| Context
             PreFilter --> HybridSearch
             HybridSearch --> VectorDB
             HybridSearch --> MetadataDB
             VectorDB --> PostProc
             PostProc --> Context
+            PostProc -.-> CacheStore
             Context --> LLM
             LLM --> Response
-            PostProc --> Cache
         end
         
-        subgraph "PHASE 5: OBSERVABILITY"
-            Metrics[Metrics<br/>IBM Instana, watsonx.governance]
-            Logging[Logging<br/>IBM Instana, OpenTelemetry]
-            Tracing[Tracing<br/>OpenTelemetry, IBM Instana]
-            Evaluation[Evaluation<br/>Quality, Relevance, Cost]
+        subgraph Phase5["📊 PHASE 5: OBSERVABILITY"]
+            Metrics[📈 Metrics<br/>IBM Instana, watsonx.governance]
+            Logging[📝 Logging<br/>IBM Instana, OpenTelemetry]
+            Tracing[🔍 Tracing<br/>OpenTelemetry, IBM Instana]
+            Evaluation[⭐ Evaluation<br/>Quality, Relevance, Cost]
             
             Response --> Metrics
             Response --> Logging
@@ -182,10 +186,47 @@ graph TB
         end
     end
     
-    style Sources fill:#e1f5ff
-    style VectorDB fill:#f3e5f5
-    style LLM fill:#fff4e1
-    style Response fill:#e8f5e9
+    %% Phase 1 - Data Ingestion (Light Blue)
+    style Phase1 fill:#E3F2FD,stroke:#1976D2,stroke-width:3px
+    style Sources fill:#90CAF9,stroke:#1565C0,stroke-width:2px,color:#000
+    style Parsers fill:#64B5F6,stroke:#1565C0,stroke-width:2px,color:#000
+    style Extractors fill:#42A5F5,stroke:#1565C0,stroke-width:2px,color:#000
+    style Validation fill:#2196F3,stroke:#1565C0,stroke-width:2px,color:#fff
+    
+    %% Phase 2 - Data Enrichment (Light Purple)
+    style Phase2 fill:#F3E5F5,stroke:#7B1FA2,stroke-width:3px
+    style Chunking fill:#CE93D8,stroke:#6A1B9A,stroke-width:2px,color:#000
+    style Embedding fill:#BA68C8,stroke:#6A1B9A,stroke-width:2px,color:#fff
+    style Metadata fill:#AB47BC,stroke:#6A1B9A,stroke-width:2px,color:#fff
+    
+    %% Phase 3 - Storage (Light Pink)
+    style Phase3 fill:#FCE4EC,stroke:#C2185B,stroke-width:3px
+    style VectorDB fill:#F48FB1,stroke:#AD1457,stroke-width:2px,color:#000
+    style MetadataDB fill:#F06292,stroke:#AD1457,stroke-width:2px,color:#fff
+    style CacheStore fill:#EC407A,stroke:#AD1457,stroke-width:2px,color:#fff
+    
+    %% Phase 4 - Retrieval & Generation (Light Orange)
+    style Phase4 fill:#FFF3E0,stroke:#E65100,stroke-width:3px
+    style Query fill:#FFE082,stroke:#E65100,stroke-width:3px,color:#000
+    style QueryProc fill:#FFD54F,stroke:#E65100,stroke-width:2px,color:#000
+    style SemanticCache fill:#FFCA28,stroke:#E65100,stroke-width:2px,color:#000
+    style PreFilter fill:#FFC107,stroke:#E65100,stroke-width:2px,color:#000
+    style HybridSearch fill:#FFB300,stroke:#E65100,stroke-width:2px,color:#000
+    style PostProc fill:#FFA000,stroke:#E65100,stroke-width:2px,color:#000
+    style Context fill:#FF8F00,stroke:#E65100,stroke-width:2px,color:#fff
+    style LLM fill:#FF6F00,stroke:#E65100,stroke-width:2px,color:#fff
+    style Response fill:#FFE082,stroke:#E65100,stroke-width:3px,color:#000
+    
+    %% Phase 5 - Observability (Light Green)
+    style Phase5 fill:#E8F5E9,stroke:#2E7D32,stroke-width:3px
+    style Metrics fill:#A5D6A7,stroke:#1B5E20,stroke-width:2px,color:#000
+    style Logging fill:#81C784,stroke:#1B5E20,stroke-width:2px,color:#000
+    style Tracing fill:#66BB6A,stroke:#1B5E20,stroke-width:2px,color:#fff
+    style Evaluation fill:#4CAF50,stroke:#1B5E20,stroke-width:2px,color:#fff
+    
+    %% Pipeline containers
+    style OfflinePipeline fill:#F5F5F5,stroke:#424242,stroke-width:4px
+    style OnlinePipeline fill:#FAFAFA,stroke:#424242,stroke-width:4px
 ```
 
 ### Architecture Overview
