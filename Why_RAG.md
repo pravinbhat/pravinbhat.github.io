@@ -2,11 +2,14 @@
 
 ## Table of Contents
 
-1. [The Challenge: Traditional Search Limitations](#the-challenge-traditional-search-limitations)
-2. [The Challenge: AI/LLM-Only Search Limitations](#the-challenge-aillm-only-search-limitations)
-3. [High-Level RAG System Architecture](#high-level-rag-system-architecture)
-4. [RAG System Flow](#rag-system-flow)
-5. [Key Benefits of RAG](#key-benefits-of-rag)
+1. [Introduction](#introduction)
+2. [The Challenge: Traditional Search Limitations](#the-challenge-traditional-search-limitations)
+3. [The Challenge: AI/LLM-Only Search Limitations](#the-challenge-aillm-only-search-limitations)
+4. [The Solution: RAG (Retrieval-Augmented Generation)](#the-solution-rag-retrieval-augmented-generation)
+5. [High-Level RAG System Architecture](#high-level-rag-system-architecture)
+6. [RAG System Flow](#rag-system-flow)
+7. [Key Benefits of RAG](#key-benefits-of-rag)
+8. [Next Steps](#next-steps)
 
 ---
 
@@ -75,7 +78,7 @@ Traditional search engines trap enterprise knowledge in documents that cannot be
 
 ---
 
-## The Challenge: AI/LLM-Only Search Limitations
+## The Challenge: LLM-Only Search Limitations
 
 Using LLMs alone without retrieval also has significant drawbacks:
 
@@ -99,13 +102,13 @@ Using LLMs alone without retrieval also has significant drawbacks:
   - Same question may yield different answers
   - No grounding in factual data sources
 
-### AI/LLM-Only Search Architecture
+### LLM-Only Search Architecture
 
 ```mermaid
 graph TB
     User[👤 User Query]
     
-    subgraph LLMOnly["AI/LLM-Only System"]
+    subgraph LLMOnly["LLM-Only System"]
         direction TB
         LLM[🤖 Large Language Model<br/>Parametric Memory Only]
     end
