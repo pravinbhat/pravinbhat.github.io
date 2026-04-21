@@ -19,29 +19,25 @@
 
 ## Introduction
 
-Enterprise search and information retrieval have evolved significantly, yet organizations still struggle to provide accurate, contextual answers to user queries. Traditional keyword-based search systems miss semantic meaning, while standalone AI models can hallucinate or provide outdated information.
+Enterprise search and information retrieval have evolved, yet organizations struggle to provide contextual answers because keyword-based search lacks semantic depth, while standalone AI models often suffer from hallucinations and outdated data.
 
-**Retrieval-Augmented Generation (RAG)** represents a breakthrough approach that combines the best of both worlds: the semantic understanding of Large Language Models with the factual grounding of enterprise knowledge bases. This document explores why RAG has become the preferred architecture for enterprise AI search systems.
+**Retrieval-Augmented Generation (RAG)** is a breakthrough architecture that combines LLM intelligence with the factual grounding of enterprise data, making it the premier choice for modern AI search systems.
 
 ---
 
-## The Challenge: Traditional Search Limitations
+## The Core Challenge: Why Traditional Search Fails
 
-Traditional enterprise search has fundamental limitations:
+Current enterprise information retrieval systems often fail to provide contextual answers
 
 ### Core Problems
 
-- **Keyword matching only**
-  - Misses semantic meaning and context
+- **Keyword-Centric**: Misses semantic meaning and context
 
-- **No understanding of context or intent**
-  - Cannot interpret beyond literal terms
+- **Context Blindness**: Cannot interpret beyond literal terms
 
-- **Poor handling of synonyms and variations**
-  - "automobile" won't find "car"
+- **Poor handling of synonyms and variations**: "automobile" won't find "car
 
-- **No ranking by relevance**
-  - Results ranked by keyword frequency, not actual relevance
+- **Static Ranking**: Ranked by keyword frequency, not relevance
 
 ### Traditional Search Architecture
 
@@ -84,29 +80,17 @@ Traditional search engines trap enterprise knowledge in documents that cannot be
 
 ---
 
-## The Challenge: LLM-Only Search Limitations
+## The LLM Dilemma: Risk of Non-Grounded AI
 
-Using LLMs alone without retrieval also has significant drawbacks:
+Deploying LLMs without retrieval introduces significant risks:
 
-- **Hallucinations and fabricated information**
-  - Models may generate plausible-sounding but incorrect answers
-  - No way to verify accuracy of responses
+- **Hallucinations**: Models may generate plausible-sounding but fabricated information
 
-- **Outdated knowledge**
-  - Training data has a cutoff date
-  - Cannot access recent information or updates
+- **Outdated knowledge**: Training data has a cutoff date
 
-- **No source attribution**
-  - Cannot cite or reference specific documents
-  - Difficult to verify or audit responses
+- **Lack of Verifiability**: Cannot cite and difficult to verify or audit
 
-- **Limited domain-specific knowledge**
-  - General training may lack specialized enterprise data
-  - Cannot access proprietary or confidential information
-
-- **Inconsistent responses**
-  - Same question may yield different answers
-  - No grounding in factual data sources
+- **Sustainability Costs**: Model retraining is prohibitively expensive
 
 ### LLM-Only Search Architecture
 
@@ -144,9 +128,9 @@ LLM-only systems, while powerful, cannot access enterprise-specific knowledge or
 
 ---
 
-## The Solution: RAG (Retrieval-Augmented Generation)
+## The Solution: Retrieval-Augmented Generation (RAG)
 
-RAG solves both traditional search and LLM-only limitations by combining retrieval and generation in a unified pipeline to produce accurate, grounded responses.
+RAG solves both traditional search and LLM-only limitations by combining retrieval and generation in a unified pipeline to produce accurate, grounded responses
 
 ### Comparison: Why RAG is Superior
 
