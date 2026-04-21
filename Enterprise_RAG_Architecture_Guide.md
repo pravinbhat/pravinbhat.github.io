@@ -316,10 +316,10 @@ Different formats require specialized parsing strategies to extract meaningful c
 - **Metadata extraction**: Document properties and attributes
 
 **Technologies:**
-- **docling.ai**: Advanced document understanding and parsing
-- **Apache Tika**: Universal document parser supporting 1000+ formats
-- **PyPDF2**: Python PDF parsing library
-- **Unstructured.io**: Modern document parsing with ML-based extraction
+- **[docling.ai](https://ds4sd.github.io/docling/)**: Advanced document understanding and parsing
+- **[Apache Tika](https://tika.apache.org/)**: Universal document parser supporting 1000+ formats
+- **[PyPDF2](https://pypdf2.readthedocs.io/)**: Python PDF parsing library
+- **[Unstructured.io](https://unstructured.io/)**: Modern document parsing with ML-based extraction
 
 ### 3. Data Validation & Deduplication
 
@@ -358,7 +358,7 @@ Different formats require specialized parsing strategies to extract meaningful c
 While the offline pipeline typically processes data in batches, modern RAG systems often require real-time or near-real-time data updates to ensure information freshness. This complements batch ingestion, allowing you to balance thoroughness (batch) with freshness (streaming).
 
 **Streaming Ingestion:**
-- **Confluent Kafka (via watsonx.data)**: Stream real-time data updates into your RAG pipeline
+- **[Confluent Kafka](https://www.confluent.io/) (via [watsonx.data](https://www.ibm.com/products/watsonx-data))**: Stream real-time data updates into your RAG pipeline
 - **Change Data Capture (CDC)**: Automatically detect and ingest changes from source systems
 - **Event-Driven Architecture**: Trigger processing pipelines based on data events
 
@@ -379,7 +379,7 @@ Enrichment Pipeline → Vector DB Update
 - Implement proper ordering and deduplication for streaming data
 - Monitor lag and throughput for streaming pipelines
 - Handle schema evolution and backward compatibility
-- Consider platforms with query federation (e.g., watsonx.data) to unify access to both streaming and batch data sources
+- Consider platforms with query federation (e.g., [watsonx.data](https://www.ibm.com/products/watsonx-data)) to unify access to both streaming and batch data sources
 
 ### Best Practices
 
@@ -460,14 +460,14 @@ Embeddings are dense vector representations of text that capture semantic meanin
 #### Model Options
 
 **Open Source:**
-- **sentence-transformers**: Popular, well-maintained, good quality
-- **IBM Granite Embeddings**: Enterprise-optimized, multilingual support
-- **NVIDIA NIMs**: Optimized inference performance
+- **[sentence-transformers](https://www.sbert.net/)**: Popular, well-maintained, good quality
+- **[IBM Granite Embeddings](https://www.ibm.com/products/watsonx-ai/foundation-models)**: Enterprise-optimized, multilingual support
+- **[NVIDIA NIMs](https://www.nvidia.com/en-us/ai/)**: Optimized inference performance
 
 **Commercial:**
-- **OpenAI text-embedding-ada-002**: High quality, cost-effective
-- **Cohere embed-english-v3.0**: Strong performance, flexible
-- **Voyage AI**: Specialized for retrieval tasks
+- **[OpenAI text-embedding-ada-002](https://platform.openai.com/docs/guides/embeddings)**: High quality, cost-effective
+- **[Cohere embed-english-v3.0](https://cohere.com/embeddings)**: Strong performance, flexible
+- **[Voyage AI](https://www.voyageai.com/)**: Specialized for retrieval tasks
 
 #### Best Practices
 
@@ -548,10 +548,10 @@ Stores embeddings and enables fast similarity search.
 - **Performance**: Sub-100ms query latency
 
 **Popular Options:**
-- **OpenSearch** (via watsonx.data): Full-text + vector search, mature ecosystem
-- **Milvus** (via watsonx.data): Purpose-built for vectors, high performance
-- **Qdrant** (via watsonx.data): Developer-friendly, good performance
-- **AstraDB** (via watsonx.data): Managed Cassandra with vector support
+- **[OpenSearch](https://opensearch.org/)** (via [watsonx.data](https://www.ibm.com/products/watsonx-data)): Full-text + vector search, mature ecosystem
+- **[AstraDB](https://www.datastax.com/products/datastax-astra)** (via [watsonx.data](https://www.ibm.com/products/watsonx-data)): Managed Cassandra with vector support
+- **[Milvus](https://milvus.io/)** (via [watsonx.data](https://www.ibm.com/products/watsonx-data)): Purpose-built for vectors, high performance
+- **[Qdrant](https://qdrant.tech/)** (via [watsonx.data](https://www.ibm.com/products/watsonx-data)): Developer-friendly, good performance
 
 #### 2. Metadata Store
 
@@ -564,9 +564,9 @@ Stores structured metadata for filtering and analytics.
 - Support for complex queries
 
 **Options:**
-- **Cassandra/AstraDB** (via watsonx.data): Scalable, distributed
-- **MongoDB** (via watsonx.data): Flexible schema, rich queries
-- **PostgreSQL**: ACID compliance, mature tooling
+- **[Cassandra](https://cassandra.apache.org/)/[AstraDB](https://www.datastax.com/products/datastax-astra)** (via [watsonx.data](https://www.ibm.com/products/watsonx-data)): Scalable, distributed
+- **[MongoDB](https://www.mongodb.com/)** (via [watsonx.data](https://www.ibm.com/products/watsonx-data)): Flexible schema, rich queries
+- **[PostgreSQL](https://www.postgresql.org/)**: ACID compliance, mature tooling
 
 #### 3. Caching Layer
 
@@ -579,8 +579,8 @@ Reduces latency and costs by caching frequent queries and results.
 - **Semantic cache**: Match similar queries
 
 **Technologies:**
-- **Redis**: Fast, feature-rich, widely adopted
-- **Memcached**: Simple, high-performance
+- **[Redis](https://redis.io/)**: Fast, feature-rich, widely adopted
+- **[Memcached](https://memcached.org/)**: Simple, high-performance
 
 ### Architecture Patterns
 
@@ -934,7 +934,7 @@ Reorder results using more sophisticated models for improved relevance.
 
 **Reranking Models:**
 - **Cross-encoders**: Evaluate query-document pairs jointly
-  - Examples: BERT-based rerankers, Cohere rerank
+  - Examples: BERT-based rerankers, [Cohere rerank](https://cohere.com/rerank)
   - More accurate but slower
 - **LLM-based**: Use LLM to score relevance
   - Most accurate but most expensive
@@ -1027,12 +1027,12 @@ Generate the final response using the assembled context.
 - **Context window**: Maximum tokens for context + response
 - **Capabilities**: Instruction following, citation generation
 
-**Popular Options (via watsonx.ai):**
-- **IBM Granite**: Enterprise-optimized, strong reasoning
-- **GPT-4**: Highest quality, expensive
-- **GPT-3.5-turbo**: Good balance of quality and cost
-- **Cohere Command**: Strong for RAG use cases
-- **NVIDIA NIMs**: Optimized inference performance
+**Popular Options (via [watsonx.ai](https://www.ibm.com/products/watsonx-ai)):**
+- **[IBM Granite](https://www.ibm.com/products/watsonx-ai/foundation-models)**: Enterprise-optimized, strong reasoning
+- **[GPT-4](https://platform.openai.com/)**: Highest quality, expensive
+- **[GPT-3.5-turbo](https://platform.openai.com/)**: Good balance of quality and cost
+- **[Cohere Command](https://cohere.com/)**: Strong for RAG use cases
+- **[NVIDIA NIMs](https://www.nvidia.com/en-us/ai/)**: Optimized inference performance
 
 **Generation Parameters:**
 - **Temperature**: 0.0-0.3 for factual responses (lower = more deterministic)
@@ -1121,19 +1121,19 @@ graph TB
 
 ### Monitoring Tools and Platforms
 
-**IBM Instana:**
+**[IBM Instana](https://www.ibm.com/products/instana):**
 - Application Performance Monitoring (APM)
 - Automatic discovery and monitoring
 - Real-time metrics and alerting
 - Distributed tracing
 
-**IBM watsonx.governance:**
+**[IBM watsonx.governance](https://www.ibm.com/products/watsonx-governance):**
 - AI model monitoring and governance
 - Bias detection and fairness metrics
 - Compliance tracking and audit trails
 - Model drift detection
 
-**OpenTelemetry:**
+**[OpenTelemetry](https://opentelemetry.io/):**
 - Vendor-neutral observability framework
 - Distributed tracing across services
 - Metrics and logs collection
@@ -1178,7 +1178,7 @@ graph TB
 
 ### IBM watsonx.data Reference Architecture
 
-For organizations seeking an integrated, enterprise-grade RAG solution, IBM watsonx.data provides a comprehensive platform that simplifies architecture while maintaining flexibility and performance. The unified lakehouse approach consolidates vector databases, metadata stores, object storage, and streaming data into a single, governed platform with query federation capabilities.
+For organizations seeking an integrated, enterprise-grade RAG solution, [IBM watsonx.data](https://www.ibm.com/products/watsonx-data) provides a comprehensive platform that simplifies architecture while maintaining flexibility and performance. The unified lakehouse approach consolidates vector databases, metadata stores, object storage, and streaming data into a single, governed platform with query federation capabilities.
 
 #### Architecture Overview
 
@@ -1208,16 +1208,16 @@ For organizations seeking an integrated, enterprise-grade RAG solution, IBM wats
 
 #### Technology Stack
 
-**Data Layer - IBM watsonx.data (Unified Lakehouse):**
+**Data Layer - [IBM watsonx.data](https://www.ibm.com/products/watsonx-data) (Unified Lakehouse):**
 - **Vector Search**: OpenSearch, AstraDB, or Milvus integration for semantic search
 - **Metadata Management**: Cassandra/AstraDB for document and chunk metadata
 - **Object Storage**: S3-compatible interfaces (IBM Cloud Object Storage)
 - **Streaming Data**: Confluent Kafka integration for real-time data ingestion
-- **Open Table Formats**: Iceberg, Hudi, Delta Lake for cost-optimized storage
+- **Open Table Formats**: [Iceberg](https://iceberg.apache.org/), [Hudi](https://hudi.apache.org/), [Delta Lake](https://delta.io/) for cost-optimized storage
 - **Query Federation**: Single interface to query across all data sources
-- **Multi-Engine Support**: Presto, Spark, and other engines for diverse workloads
+- **Multi-Engine Support**: [Presto](https://prestodb.io/), [Spark](https://spark.apache.org/), and other engines for diverse workloads
 
-**AI Layer - IBM watsonx.ai:**
+**AI Layer - [IBM watsonx.ai](https://www.ibm.com/products/watsonx-ai):**
 - **LLM Hosting & Inference**: Flexible model deployment options
   - IBM Granite models (optimized for enterprise use cases)
   - OpenAI models (GPT-4, GPT-3.5)
@@ -1228,7 +1228,7 @@ For organizations seeking an integrated, enterprise-grade RAG solution, IBM wats
 - **Enterprise Features**: Built-in governance, compliance, and performance optimization
 
 **Governance & Monitoring:**
-- **IBM watsonx.governance**: AI lifecycle management
+- **[IBM watsonx.governance](https://www.ibm.com/products/watsonx-governance)**: AI lifecycle management
   - Model monitoring and drift detection
   - Compliance tracking and audit trails
   - Risk management and bias detection
