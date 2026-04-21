@@ -1,11 +1,15 @@
-# Why RAG (Retrieval-Augmented Generation)?
+# 🎯 Why RAG (Retrieval-Augmented Generation)?
+
+> **TL;DR**: RAG combines the semantic understanding of AI with the factual grounding of enterprise knowledge bases, solving the limitations of both traditional search and standalone LLMs.
+
+---
 
 ## Table of Contents
 
 1. [Introduction](#introduction)
 2. [The Challenge: Traditional Search Limitations](#the-challenge-traditional-search-limitations)
-3. [The Challenge: AI/LLM-Only Search Limitations](#the-challenge-aillm-only-search-limitations)
-4. [The Solution: RAG (Retrieval-Augmented Generation)](#the-solution-rag-retrieval-augmented-generation)
+3. [The Challenge: LLM-Only Search Limitations](#the-challenge-llm-only-search-limitations)
+4. [The Solution: RAG](#the-solution-rag-retrieval-augmented-generation)
 5. [High-Level RAG System Architecture](#high-level-rag-system-architecture)
 6. [RAG System Flow](#rag-system-flow)
 7. [Key Benefits of RAG](#key-benefits-of-rag)
@@ -24,6 +28,8 @@ Enterprise search and information retrieval have evolved significantly, yet orga
 ## The Challenge: Traditional Search Limitations
 
 Traditional enterprise search has fundamental limitations:
+
+### Core Problems
 
 - **Keyword matching only**
   - Misses semantic meaning and context
@@ -140,7 +146,7 @@ LLM-only systems, while powerful, cannot access enterprise-specific knowledge or
 
 ## The Solution: RAG (Retrieval-Augmented Generation)
 
-RAG solves both traditional search and LLM-only limitations by combining retrieval and generation in a unified pipeline to produce accurate, grounded responses:
+RAG solves both traditional search and LLM-only limitations by combining retrieval and generation in a unified pipeline to produce accurate, grounded responses.
 
 ### How RAG Addresses the Challenges
 
@@ -189,12 +195,16 @@ graph TB
     style RAG fill:#f9f9f9,stroke:#333,stroke-width:2px
 ```
 
+---
+
 ## RAG System Flow
 
 1. **User submits a query** - The user asks a question or makes a request
 2. **Retrieval engine fetches relevant context** - The system searches the knowledge base for relevant information
 3. **Query and context are combined** - The original query is augmented with retrieved context
 4. **LLM generates contextually-aware answer** - The language model produces a response based on both the query and retrieved context
+
+---
 
 ## Key Benefits of RAG
 
@@ -217,7 +227,6 @@ No need for expensive model fine-tuning or retraining.
 Easy integration of specialized enterprise information.
 
 **Example**: A manufacturing company can integrate technical manuals, safety procedures, maintenance logs, and proprietary engineering documents into their RAG system, providing employees with instant access to specialized knowledge that general-purpose LLMs don't possess.
-
 
 ---
 
