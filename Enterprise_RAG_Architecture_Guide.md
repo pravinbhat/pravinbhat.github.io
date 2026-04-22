@@ -1005,9 +1005,9 @@ Production RAG systems require comprehensive monitoring to ensure quality, perfo
 graph TB
     subgraph "Observability Stack"
         Metrics[📊 Metrics<br/>Performance, Quality, Cost]
+        Eval[✅ Evaluation<br/>Quality Assessment]
         Logs[📝 Logs<br/>Errors, Warnings, Debug]
         Traces[🔍 Traces<br/>End-to-End Request Flow]
-        Eval[✅ Evaluation<br/>Quality Assessment]
     end
     
     subgraph "Monitoring Tools"
@@ -1017,11 +1017,11 @@ graph TB
     end
     
     Metrics --> Instana
+    Eval --> Governance
     Metrics --> Governance
     Logs --> Instana
     Traces --> OpenTel
     Traces --> Instana
-    Eval --> Governance
 ```
 
 ### Why Observability Matters
