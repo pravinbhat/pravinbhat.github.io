@@ -1,3 +1,4 @@
+<!--
 ---
 layout: default
 title: "Why RAG (Retrieval-Augmented Generation)?"
@@ -8,6 +9,7 @@ categories: [AI, RAG, Enterprise Architecture]
 tags: [RAG, Retrieval-Augmented Generation, LLM, Vector Database, Semantic Search, Enterprise AI, Machine Learning]
 permalink: /why-rag/
 ---
+-->
 
 # 🎯 Why RAG (Retrieval-Augmented Generation)?
 
