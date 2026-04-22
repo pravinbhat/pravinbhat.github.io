@@ -9,7 +9,7 @@ Welcome to my collection of technical articles on AI, enterprise architecture, a
 ### 🎯 Why RAG (Retrieval-Augmented Generation)?
 **[Read Article →](Why_RAG.md)** | _April 2026_
 
-An introduction to RAG technology, explaining why it's become the preferred architecture for enterprise AI search by combining the best of traditional search and LLMs.
+An introduction to RAG technology, explaining why it's become the preferred architecture for enterprise AI applications by combining the best of traditional search and LLMs.
 
 **Topics Covered:**
 - 🔍 Traditional search limitations
@@ -19,10 +19,10 @@ An introduction to RAG technology, explaining why it's become the preferred arch
 
 ---
 
-### 🏗️ Enterprise AI Search with RAG: Complete Architecture Guide
+### 🏗️ Enterprise RAG: Complete Architecture Guide
 **[Read Article →](Enterprise_RAG_Architecture_Guide.md)** | _April 2026_
 
-A comprehensive technical guide for implementing enterprise-grade AI search systems using Retrieval-Augmented Generation (RAG).
+A comprehensive technical guide for implementing enterprise-grade RAG systems using Retrieval-Augmented Generation architecture.
 
 **Topics Covered:**
 - 🎯 Reference architecture & design patterns
