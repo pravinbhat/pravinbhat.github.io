@@ -7,9 +7,9 @@
 ## Table of Contents
 
 1. [Introduction](#introduction)
-2. [The Challenge: Traditional Search Limitations](#the-challenge-traditional-search-limitations)
-3. [The Challenge: LLM-Only Search Limitations](#the-challenge-llm-only-search-limitations)
-4. [The Solution: RAG](#the-solution-rag-retrieval-augmented-generation)
+2. [The Core Challenge: Why Traditional Search Fails](#the-core-challenge-why-traditional-search-fails)
+3. [The LLM Dilemma: Risk of Non-Grounded AI](#the-llm-dilemma-risk-of-non-grounded-ai)
+4. [The Solution: Retrieval-Augmented Generation (RAG)](#the-solution-retrieval-augmented-generation-rag)
 5. [High-Level RAG System Architecture](#high-level-rag-system-architecture)
 6. [RAG System Flow](#rag-system-flow)
 7. [Key Benefits of RAG](#key-benefits-of-rag)
@@ -92,7 +92,7 @@ Deploying LLMs without retrieval introduces significant risks:
 
 - **Sustainability Costs**: Model retraining is prohibitively expensive
 
-### LLM-Only Search Architecture
+### LLM-Only System Architecture
 
 ```mermaid
 graph TB
