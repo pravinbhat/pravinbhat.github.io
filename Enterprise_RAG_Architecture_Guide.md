@@ -1,7 +1,7 @@
 ---
 layout: default
 title: "Enterprise RAG: Complete Architecture Guide"
-description: "Comprehensive technical guide for implementing production-ready RAG systems. Covers data ingestion, embeddings, vector databases, retrieval pipelines, and monitoring with IBM watsonx.data integration."
+description: "Production-ready RAG architecture guide covering data ingestion, embeddings, vector databases, retrieval pipelines, and monitoring for enterprise systems."
 date: 2026-04-21
 author: Pravin Bhat
 categories: [AI, RAG, Enterprise Architecture, System Design]
