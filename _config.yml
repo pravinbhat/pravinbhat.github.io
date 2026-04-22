@@ -2,6 +2,12 @@ theme: jekyll-theme-cayman
 title: Enterprise Solution Architect @ IBM (Watsonx Data Labs)
 description: Systems thinker — distributed systems, enterprise architecture, and GenAI. I design and build scalable, clean solutions that prioritize real-world impact and people.
 
+# Markdown Settings
+markdown: kramdown
+kramdown:
+  input: GFM
+  syntax_highlighter: rouge
+
 # SEO Settings
 plugins:
   - jekyll-seo-tag
