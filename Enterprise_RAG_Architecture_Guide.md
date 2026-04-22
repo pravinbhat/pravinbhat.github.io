@@ -136,47 +136,50 @@ graph TB
         end
     end
     
-    %% Phase 1 - Data Ingestion (Light Blue)
-    style Phase1 fill:#E3F2FD,stroke:#1976D2,stroke-width:3px
-    style Sources fill:#90CAF9,stroke:#1565C0,stroke-width:2px,color:#000
-    style Parsers fill:#64B5F6,stroke:#1565C0,stroke-width:2px,color:#000
-    style Extractors fill:#42A5F5,stroke:#1565C0,stroke-width:2px,color:#000
-    style Validation fill:#2196F3,stroke:#1565C0,stroke-width:2px,color:#fff
+    %% Phase 1 - Data Ingestion (Blue with darker background)
+    style Phase1 fill:#BBDEFB,stroke:#0D47A1,stroke-width:4px,color:#000
+    style Sources fill:#64B5F6,stroke:#0D47A1,stroke-width:3px,color:#000
+    style Parsers fill:#42A5F5,stroke:#0D47A1,stroke-width:3px,color:#000
+    style Extractors fill:#2196F3,stroke:#0D47A1,stroke-width:3px,color:#000
+    style Validation fill:#1976D2,stroke:#0D47A1,stroke-width:3px,color:#fff
     
-    %% Phase 2 - Data Enrichment (Light Purple)
-    style Phase2 fill:#F3E5F5,stroke:#7B1FA2,stroke-width:3px
-    style Chunking fill:#CE93D8,stroke:#6A1B9A,stroke-width:2px,color:#000
-    style Embedding fill:#BA68C8,stroke:#6A1B9A,stroke-width:2px,color:#fff
-    style Metadata fill:#AB47BC,stroke:#6A1B9A,stroke-width:2px,color:#fff
+    %% Phase 2 - Data Enrichment (Purple with darker background)
+    style Phase2 fill:#E1BEE7,stroke:#4A148C,stroke-width:4px,color:#000
+    style Chunking fill:#BA68C8,stroke:#4A148C,stroke-width:3px,color:#000
+    style Embedding fill:#9C27B0,stroke:#4A148C,stroke-width:3px,color:#fff
+    style Metadata fill:#7B1FA2,stroke:#4A148C,stroke-width:3px,color:#fff
     
-    %% Phase 3 - Storage (Light Pink)
-    style Phase3 fill:#FCE4EC,stroke:#C2185B,stroke-width:3px
-    style VectorDB fill:#F48FB1,stroke:#AD1457,stroke-width:2px,color:#000
-    style MetadataDB fill:#F06292,stroke:#AD1457,stroke-width:2px,color:#fff
-    style CacheStore fill:#EC407A,stroke:#AD1457,stroke-width:2px,color:#fff
+    %% Phase 3 - Storage (Pink with darker background)
+    style Phase3 fill:#F8BBD0,stroke:#880E4F,stroke-width:4px,color:#000
+    style VectorDB fill:#F06292,stroke:#880E4F,stroke-width:3px,color:#000
+    style MetadataDB fill:#E91E63,stroke:#880E4F,stroke-width:3px,color:#fff
+    style CacheStore fill:#C2185B,stroke:#880E4F,stroke-width:3px,color:#fff
     
-    %% Phase 4 - Retrieval & Generation (Light Orange)
-    style Phase4 fill:#FFF3E0,stroke:#E65100,stroke-width:3px
-    style Query fill:#FFE082,stroke:#E65100,stroke-width:3px,color:#000
-    style QueryProc fill:#FFD54F,stroke:#E65100,stroke-width:2px,color:#000
-    style SemanticCache fill:#FFCA28,stroke:#E65100,stroke-width:2px,color:#000
-    style PreFilter fill:#FFC107,stroke:#E65100,stroke-width:2px,color:#000
-    style HybridSearch fill:#FFB300,stroke:#E65100,stroke-width:2px,color:#000
-    style PostProc fill:#FFA000,stroke:#E65100,stroke-width:2px,color:#000
-    style Context fill:#FF8F00,stroke:#E65100,stroke-width:2px,color:#fff
-    style LLM fill:#FF6F00,stroke:#E65100,stroke-width:2px,color:#fff
-    style Response fill:#FFE082,stroke:#E65100,stroke-width:3px,color:#000
+    %% Phase 4 - Retrieval & Generation (Orange with darker background)
+    style Phase4 fill:#FFE0B2,stroke:#BF360C,stroke-width:4px,color:#000
+    style Query fill:#FFB300,stroke:#E65100,stroke-width:4px,color:#000
+    style QueryProc fill:#FFA000,stroke:#E65100,stroke-width:3px,color:#000
+    style SemanticCache fill:#FF8F00,stroke:#E65100,stroke-width:3px,color:#000
+    style PreFilter fill:#FF6F00,stroke:#E65100,stroke-width:3px,color:#000
+    style HybridSearch fill:#F57C00,stroke:#E65100,stroke-width:3px,color:#000
+    style PostProc fill:#EF6C00,stroke:#E65100,stroke-width:3px,color:#fff
+    style Context fill:#E65100,stroke:#BF360C,stroke-width:3px,color:#fff
+    style LLM fill:#D84315,stroke:#BF360C,stroke-width:3px,color:#fff
+    style Response fill:#FFB300,stroke:#E65100,stroke-width:4px,color:#000
     
-    %% Phase 5 - Observability (Light Green)
-    style Phase5 fill:#E8F5E9,stroke:#2E7D32,stroke-width:3px
-    style Metrics fill:#A5D6A7,stroke:#1B5E20,stroke-width:2px,color:#000
-    style Logging fill:#81C784,stroke:#1B5E20,stroke-width:2px,color:#000
-    style Tracing fill:#66BB6A,stroke:#1B5E20,stroke-width:2px,color:#fff
-    style Evaluation fill:#4CAF50,stroke:#1B5E20,stroke-width:2px,color:#fff
+    %% Phase 5 - Observability (Green with darker background)
+    style Phase5 fill:#C8E6C9,stroke:#1B5E20,stroke-width:4px,color:#000
+    style Metrics fill:#81C784,stroke:#1B5E20,stroke-width:3px,color:#000
+    style Logging fill:#66BB6A,stroke:#1B5E20,stroke-width:3px,color:#000
+    style Tracing fill:#4CAF50,stroke:#1B5E20,stroke-width:3px,color:#fff
+    style Evaluation fill:#388E3C,stroke:#1B5E20,stroke-width:3px,color:#fff
     
-    %% Pipeline containers
-    style OfflinePipeline fill:#F5F5F5,stroke:#424242,stroke-width:4px
-    style OnlinePipeline fill:#FAFAFA,stroke:#424242,stroke-width:4px
+    %% Pipeline containers with darker backgrounds
+    style OfflinePipeline fill:#E0E0E0,stroke:#212121,stroke-width:5px,color:#000
+    style OnlinePipeline fill:#EEEEEE,stroke:#212121,stroke-width:5px,color:#000
+    
+    %% Make arrows thicker and more visible
+    linkStyle default stroke:#333,stroke-width:3px
 ```
 
 ### Architecture Overview
