@@ -1,0 +1,15 @@
+@media screen and (min-width: 64em) {
+  .main-content {
+    max-width: 1400px;
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+}
+
+.main-content .mermaid,
+.main-content svg {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Made with Bob */
