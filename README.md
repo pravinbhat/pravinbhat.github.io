@@ -33,12 +33,12 @@ A comprehensive technical guide for implementing enterprise-grade AI search syst
 
 ---
 
-## 👤 About
+## ![Batman](https://img.icons8.com/color/48/batman.png) About
 
 **Pravin Bhat**  
 Enterprise Solution Architect @ IBM (Watsonx Data Labs)
 
-Passionate about building scalable AI systems and enterprise architectures that solve real-world business problems.
+Systems thinker — distributed systems, enterprise architecture, and GenAI. I design and build scalable, clean solutions that prioritize real-world impact and people.
 
 ---
 
