@@ -1,4 +1,3 @@
-<!--
 ---
 layout: default
 title: "Enterprise RAG: Complete Architecture Guide"
@@ -9,7 +8,6 @@ categories: [AI, RAG, Enterprise Architecture, System Design]
 tags: [RAG, Enterprise Architecture, Vector Database, Embeddings, LLM, Retrieval Pipeline, Semantic Search, watsonx, IBM, Production Systems, Monitoring]
 permalink: /enterprise-rag-architecture/
 ---
--->
 
 # Enterprise RAG: Complete Architecture Guide
 

@@ -2,6 +2,8 @@
 layout: default
 title: "Pravin Bhat - Technical Blog & Articles"
 description: "Technical articles on AI, RAG, enterprise architecture, and modern software engineering by Pravin Bhat, Enterprise Solution Architect at IBM."
+date: 2026-04-21
+author: Pravin Bhat
 permalink: /
 ---
 
@@ -14,7 +16,7 @@ Welcome to my collection of technical articles on AI, enterprise architecture, a
 ## 🤖 AI & Machine Learning
 
 ### 🎯 Why RAG (Retrieval-Augmented Generation)?
-**[Read Article →](Why_RAG.md)** | _April 2026_
+**[Read Article →](/why-rag/)** | _April 2026_
 
 An introduction to RAG technology, explaining why it's become the preferred architecture for enterprise AI applications by combining the best of traditional search and LLMs.
 
@@ -27,7 +29,7 @@ An introduction to RAG technology, explaining why it's become the preferred arch
 ---
 
 ### 🏗️ Enterprise RAG: Complete Architecture Guide
-**[Read Article →](Enterprise_RAG_Architecture_Guide.md)** | _April 2026_
+**[Read Article →](/enterprise-rag-architecture/)** | _April 2026_
 
 A comprehensive technical guide for implementing enterprise-grade RAG systems using Retrieval-Augmented Generation architecture.
 
