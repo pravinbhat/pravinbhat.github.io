@@ -1,6 +1,6 @@
-theme: jekyll-theme-minimal
-title: Pravin Bhat - Enterprise AI & RAG Architecture
-description: Technical articles on RAG, enterprise AI architecture, and modern software engineering by Pravin Bhat, Enterprise Solution Architect at IBM.
+theme: jekyll-theme-cayman
+title: Enterprise Solution Architect @ IBM (Watsonx Data Labs)
+description: Systems thinker — distributed systems, enterprise architecture, and GenAI. I design and build scalable, clean solutions that prioritize real-world impact and people.
 
 # SEO Settings
 plugins:
