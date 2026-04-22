@@ -27,7 +27,7 @@ Enterprise search and information retrieval have evolved, yet organizations stru
 
 ## The Core Challenge: Why Traditional Search Fails
 
-Current enterprise information retrieval systems often fail to provide contextual answers
+Current enterprise information retrieval systems often fail to provide contextual answers due to fundamental architectural limitations.
 
 ### Core Problems
 
@@ -35,7 +35,7 @@ Current enterprise information retrieval systems often fail to provide contextua
 
 - **Context Blindness**: Cannot interpret beyond literal terms
 
-- **Poor handling of synonyms and variations**: "automobile" won't find "car
+- **Poor handling of synonyms and variations**: "automobile" won't find "car"
 
 - **Static Ranking**: Ranked by keyword frequency, not relevance
 
@@ -130,7 +130,7 @@ LLM-only systems, while powerful, cannot access enterprise-specific knowledge or
 
 ## The Solution: Retrieval-Augmented Generation (RAG)
 
-RAG solves both traditional search and LLM-only limitations by combining retrieval and generation in a unified pipeline to produce accurate, grounded responses
+RAG solves both traditional search and LLM-only limitations by combining retrieval and generation in a unified pipeline to produce accurate, grounded responses.
 
 ### Comparison: Why RAG is Superior
 
