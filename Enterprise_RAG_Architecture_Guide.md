@@ -1,3 +1,14 @@
+---
+layout: default
+title: "Enterprise RAG: Complete Architecture Guide"
+description: "Comprehensive technical guide for implementing production-ready RAG systems. Covers data ingestion, embeddings, vector databases, retrieval pipelines, and monitoring with IBM watsonx.data integration."
+date: 2026-04-21
+author: Pravin Bhat
+categories: [AI, RAG, Enterprise Architecture, System Design]
+tags: [RAG, Enterprise Architecture, Vector Database, Embeddings, LLM, Retrieval Pipeline, Semantic Search, watsonx, IBM, Production Systems, Monitoring]
+permalink: /enterprise-rag-architecture/
+---
+
 # Enterprise RAG: Complete Architecture Guide
 
 > **TL;DR**: A comprehensive technical guide for implementing production-ready RAG systems, covering the complete pipeline from data ingestion to monitoring. Includes reference architecture, best practices, and IBM watsonx.data integration patterns.

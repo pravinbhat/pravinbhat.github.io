@@ -1,3 +1,10 @@
+---
+layout: default
+title: "Pravin Bhat - Technical Blog & Articles"
+description: "Technical articles on AI, RAG, enterprise architecture, and modern software engineering by Pravin Bhat, Enterprise Solution Architect at IBM."
+permalink: /
+---
+
 # 📚 Technical Blog & Articles
 
 Welcome to my collection of technical articles on AI, enterprise architecture, and modern software engineering.

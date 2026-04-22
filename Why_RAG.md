@@ -1,3 +1,14 @@
+---
+layout: default
+title: "Why RAG (Retrieval-Augmented Generation)?"
+description: "Learn why RAG combines semantic AI understanding with factual grounding to solve limitations of traditional search and standalone LLMs in enterprise applications."
+date: 2026-04-21
+author: Pravin Bhat
+categories: [AI, RAG, Enterprise Architecture]
+tags: [RAG, Retrieval-Augmented Generation, LLM, Vector Database, Semantic Search, Enterprise AI, Machine Learning]
+permalink: /why-rag/
+---
+
 # 🎯 Why RAG (Retrieval-Augmented Generation)?
 
 > **TL;DR**: RAG combines the semantic understanding of AI with the factual grounding of enterprise knowledge bases, solving the limitations of both traditional search and standalone LLMs.

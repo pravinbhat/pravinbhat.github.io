@@ -1,3 +1,29 @@
 theme: jekyll-theme-minimal
-title: Pravin's homepage
-description: Bookmark this to keep an eye on my project updates!
+title: Pravin Bhat - Enterprise AI & RAG Architecture
+description: Technical articles on RAG, enterprise AI architecture, and modern software engineering by Pravin Bhat, Enterprise Solution Architect at IBM.
+
+# SEO Settings
+plugins:
+  - jekyll-seo-tag
+
+author: Pravin Bhat
+url: https://pravinbhat.github.io
+
+# Social Media
+twitter:
+  username: pravinbhat
+  card: summary_large_image
+
+social:
+  name: Pravin Bhat
+  links:
+    - https://github.com/pravinbhat
+    - https://linkedin.com/in/pravinbhat
+
+# SEO Defaults
+defaults:
+  - scope:
+      path: ""
+    values:
+      image: /assets/images/og-default.jpg
+      author: Pravin Bhat
