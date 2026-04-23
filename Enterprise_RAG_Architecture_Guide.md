@@ -46,24 +46,6 @@ This guide assumes familiarity with those concepts and focuses exclusively on th
 
 ---
 
-## 💼 Enterprise RAG Use Cases
-
-RAG is transforming how enterprises access and leverage their knowledge:
-
-**📚 Knowledge Management**: Internal wikis and documentation retrieval, policy and procedure retrieval, employee self-service Q&A systems, and institutional knowledge preservation.
-
-**💬 Customer Support**: Automated support with accurate answers, agent assistance tools, ticket deflection and resolution, and 24/7 customer service availability.
-
-**⚖️ Compliance & Legal**: Policy retrieval and interpretation, regulatory compliance checks, contract analysis and review, and legal precedent research.
-
-**🔬 Research & Development**: Scientific literature discovery, patent analysis and prior art discovery, research paper discovery, and technical documentation retrieval.
-
-**📈 Sales & Marketing**: Product information retrieval, competitive intelligence gathering, sales enablement materials, and marketing content discovery.
-
-These use cases demonstrate RAG's versatility across enterprise functions, with typical ROI achieved within 3-6 months of deployment.
-
----
-
 ## 🏗️ RAG Reference Architecture
 
 The RAG architecture can be organized into multiple phases, each with specific responsibilities and technologies. For this guide, we break it down into five key phases that cover the complete lifecycle from data ingestion to production monitoring.
@@ -218,10 +200,10 @@ The architecture operates through two distinct pipelines: an **offline pipeline*
 
 **PHASE 4: RETRIEVAL & GENERATION**
 - Query Processing (Clean, Expand, Embed)
+- Semantic Caching (Query, Result, Embedding Cache)
 - Pre-Filtering (Metadata, Access Control)
 - Hybrid Search (Vector + Keyword)
 - Post-Retrieval Processing (Threshold, Deduplication, Reranking, Boosting)
-- Semantic Caching (Query, Result, Embedding Cache)
 - Context Assembly & Prompt Engineering
 - LLM Generation (watsonx.ai: IBM Granite, OpenAI, Cohere, NVIDIA NIMs)
 
@@ -1216,6 +1198,24 @@ For organizations seeking an integrated, enterprise-grade RAG solution, [IBM wat
 - Teams seeking to reduce integration complexity through native connectors and query federation
 - Projects with diverse data sources where query federation provides architectural benefits
 - Deployments requiring enterprise-grade support and SLAs
+
+---
+
+## 💼 Enterprise RAG Use Cases
+
+Having explored the complete RAG architecture, let's examine how enterprises are applying these patterns across different domains:
+
+**📚 Knowledge Management**: Internal wikis and documentation retrieval, policy and procedure retrieval, employee self-service Q&A systems, and institutional knowledge preservation.
+
+**💬 Customer Support**: Automated support with accurate answers, agent assistance tools, ticket deflection and resolution, and 24/7 customer service availability.
+
+**⚖️ Compliance & Legal**: Policy retrieval and interpretation, regulatory compliance checks, contract analysis and review, and legal precedent research.
+
+**🔬 Research & Development**: Scientific literature discovery, patent analysis and prior art discovery, research paper discovery, and technical documentation retrieval.
+
+**📈 Sales & Marketing**: Product information retrieval, competitive intelligence gathering, sales enablement materials, and marketing content discovery.
+
+These use cases demonstrate RAG's versatility across enterprise functions, with typical ROI achieved within 3-6 months of deployment.
 
 ---
 
