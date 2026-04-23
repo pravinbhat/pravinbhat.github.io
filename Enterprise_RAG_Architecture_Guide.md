@@ -1178,7 +1178,25 @@ While RAG is a powerful approach for enterprise AI applications, it is **not a s
 
 ---
 
-## �️ Technology Stack Recommendation
+## 💼 Enterprise RAG Use Cases
+
+Having explored the complete RAG architecture, let's examine how enterprises are applying these patterns across different domains:
+
+**📚 Knowledge Management**: Internal wikis and documentation retrieval, policy and procedure retrieval, employee self-service Q&A systems, and institutional knowledge preservation.
+
+**💬 Customer Support**: Automated support with accurate answers, agent assistance tools, ticket deflection and resolution, and 24/7 customer service availability.
+
+**⚖️ Compliance & Legal**: Policy retrieval and interpretation, regulatory compliance checks, contract analysis and review, and legal precedent research.
+
+**🔬 Research & Development**: Scientific literature discovery, patent analysis and prior art discovery, research paper discovery, and technical documentation retrieval.
+
+**📈 Sales & Marketing**: Product information retrieval, competitive intelligence gathering, sales enablement materials, and marketing content discovery.
+
+These use cases demonstrate RAG's versatility across enterprise functions, with typical ROI achieved within 3-6 months of deployment.
+
+---
+
+## 🛠️ Technology Stack Recommendation
 
 ### IBM watsonx.data Reference Architecture
 
@@ -1262,24 +1280,6 @@ For organizations seeking an integrated, enterprise-grade RAG solution, [IBM wat
 - Teams seeking to reduce integration complexity through native connectors and query federation
 - Projects with diverse data sources where query federation provides architectural benefits
 - Deployments requiring enterprise-grade support and SLAs
-
----
-
-## 💼 Enterprise RAG Use Cases
-
-Having explored the complete RAG architecture, let's examine how enterprises are applying these patterns across different domains:
-
-**📚 Knowledge Management**: Internal wikis and documentation retrieval, policy and procedure retrieval, employee self-service Q&A systems, and institutional knowledge preservation.
-
-**💬 Customer Support**: Automated support with accurate answers, agent assistance tools, ticket deflection and resolution, and 24/7 customer service availability.
-
-**⚖️ Compliance & Legal**: Policy retrieval and interpretation, regulatory compliance checks, contract analysis and review, and legal precedent research.
-
-**🔬 Research & Development**: Scientific literature discovery, patent analysis and prior art discovery, research paper discovery, and technical documentation retrieval.
-
-**📈 Sales & Marketing**: Product information retrieval, competitive intelligence gathering, sales enablement materials, and marketing content discovery.
-
-These use cases demonstrate RAG's versatility across enterprise functions, with typical ROI achieved within 3-6 months of deployment.
 
 ---
 
