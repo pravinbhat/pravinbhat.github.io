@@ -18,14 +18,15 @@ permalink: /enterprise-rag-architecture/
 ## Table of Contents
 
 1. [Introduction](#-introduction)
-2. [Enterprise RAG Use Cases](#-enterprise-rag-use-cases)
-3. [RAG Reference Architecture](#️-rag-reference-architecture)
-4. [Phase 1: Data Ingestion](#-phase-1-data-ingestion)
-5. [Phase 2: Data Enrichment](#️-phase-2-data-enrichment)
-6. [Phase 3: Storage Architecture](#-phase-3-storage-architecture)
-7. [Phase 4: Retrieval & Generation Pipeline](#-phase-4-retrieval--generation-pipeline)
-8. [Phase 5: Observability & Monitoring](#-phase-5-observability--monitoring)
-9. [Technology Stack Recommendation](#️-technology-stack-recommendation)
+2. [RAG Reference Architecture](#️-rag-reference-architecture)
+3. [Phase 1: Data Ingestion](#-phase-1-data-ingestion)
+4. [Phase 2: Data Enrichment](#️-phase-2-data-enrichment)
+5. [Phase 3: Storage Architecture](#-phase-3-storage-architecture)
+6. [Phase 4: Retrieval & Generation Pipeline](#-phase-4-retrieval--generation-pipeline)
+7. [Phase 5: Observability & Monitoring](#-phase-5-observability--monitoring)
+8. [RAG Challenges & Considerations](#️-rag-challenges--considerations)
+9. [Enterprise RAG Use Cases](#-enterprise-rag-use-cases)
+10. [Technology Stack Recommendation](#️-technology-stack-recommendation)
 
 ---
 
