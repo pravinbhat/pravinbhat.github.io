@@ -1114,7 +1114,71 @@ graph TB
 
 ---
 
-## 🛠️ Technology Stack Recommendation
+## ⚠️ RAG Challenges & Considerations
+
+While RAG is a powerful approach for enterprise AI applications, it is **not a silver bullet**. Success requires careful engineering and continuous attention to potential pitfalls. Engineers must proactively address these challenges by understanding their root causes and implementing appropriate solutions.
+
+### Common Challenges
+
+**🎭 Hallucinations & Accuracy Issues**
+- **Challenge**: LLMs may generate plausible-sounding but incorrect answers, even with retrieved context
+- **Root Causes**: Poor quality retrieved documents, insufficient context, ambiguous queries, or model limitations
+- **Engineering Solutions**:
+  - Implement robust prompt engineering with clear instructions and constraints
+  - Add data validation and quality gates during ingestion
+  - Use confidence scoring and threshold filtering
+  - Implement citation requirements to ground responses in source documents
+  - Add human-in-the-loop review for critical use cases
+
+**📅 Stale Information**
+- **Challenge**: System provides outdated information as knowledge evolves
+- **Root Causes**: Infrequent data updates, lack of versioning, no purging of obsolete content
+- **Engineering Solutions**:
+  - Implement automated data refresh pipelines with appropriate frequency
+  - Add document versioning and temporal metadata
+  - Create purging strategies for deprecated content
+  - Use real-time data integration for time-sensitive information
+  - Monitor document freshness and alert on stale content
+
+**🐌 Poor Performance**
+- **Challenge**: Slow response times or high computational costs
+- **Root Causes**: Searching too much data ("boiling the ocean"), inefficient indexing, lack of filtering
+- **Engineering Solutions**:
+  - Implement metadata-based pre-filtering (department, date range, document type)
+  - Use access control filters to limit search scope
+  - Keep data size manageable through archiving and tiering strategies
+  - Implement semantic caching for common queries
+  - Optimize chunk sizes and embedding dimensions
+  - Use hybrid search with appropriate fusion strategies
+
+**📉 Low Quality Answers**
+- **Challenge**: Responses lack relevance, completeness, or accuracy
+- **Root Causes**: Poor chunking strategy, inadequate retrieval, no reranking, missing user feedback loop
+- **Engineering Solutions**:
+  - Experiment with different chunking strategies (semantic, hierarchical, sliding window)
+  - Implement hybrid search combining vector and keyword approaches
+  - Add reranking models to improve result ordering
+  - Use document and chunk boosting based on quality signals
+  - Collect and incorporate user feedback (thumbs up/down, ratings)
+  - Consider graph-based retrieval for complex relationships
+  - A/B test different retrieval and generation strategies
+
+### Critical Success Factors
+
+> **🎯 Key Takeaway**: RAG success depends on treating it as an **engineering system** that requires:
+>
+> 1. **Continuous Monitoring**: Track performance, quality, and cost metrics (see Phase 5: Observability)
+> 2. **Regular Evaluation**: Assess retrieval quality, answer accuracy, and user satisfaction
+> 3. **Iterative Improvement**: Use feedback loops to refine chunking, retrieval, and generation
+> 4. **Quality Gates**: Implement validation at every stage (ingestion, retrieval, generation)
+> 5. **User Feedback**: Collect and act on user ratings and corrections
+> 6. **Experimentation**: A/B test different approaches and continuously optimize
+
+**Remember**: The architecture presented in this guide provides the foundation, but achieving production-quality results requires ongoing engineering effort, monitoring, and refinement based on your specific use case and data characteristics.
+
+---
+
+## �️ Technology Stack Recommendation
 
 ### IBM watsonx.data Reference Architecture
 
@@ -1221,7 +1285,7 @@ These use cases demonstrate RAG's versatility across enterprise functions, with 
 
 _**Author**: Pravin Bhat, Enterprise Solution Architect, IBM (Watsonx Data Labs)_
 
-_**Last Updated**: April 21st, 2026_
+_**Last Updated**: April 23rd, 2026_
 
 _**Target Audience**: Technical Architects, Solution Architects, Engineering leaders, AI Developers_
 
