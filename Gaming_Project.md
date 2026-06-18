@@ -140,7 +140,7 @@ flowchart TB
     end
 
     subgraph Network["Network Backbone"]
-        TGW["<b>AWS Transit Gateway</b><br/>Inter-Region VPC Peering<br/>(Private AWS Backbone)"]
+        VPCPeer["<b>Inter-Region VPC Peering</b><br/>(Private AWS Backbone)"]
     end
 
     R53 -->|"Player Traffic<br/>(Closest Region)"| ALBE1
@@ -164,8 +164,8 @@ flowchart TB
 
     VPCE -.->|"Gateway Endpoint"| S3E
 
-    VPCEast <===>|"Cassandra Replication<br/>& Gossip Protocol"| TGW
-    TGW <===>|"Cassandra Replication<br/>& Gossip Protocol"| West
+    VPCEast <===>|"Cassandra Replication<br/>& Gossip Protocol"| VPCPeer
+    VPCPeer <===>|"Cassandra Replication<br/>& Gossip Protocol"| West
 
     RDSEPrimary -.->|"Cross-Region<br/>Replication"| West
 
@@ -186,7 +186,7 @@ flowchart TB
     class RDSEPrimary awsBlue
     class CassOLTPE,CassOLAPE awsGreen
     class S3E awsGreen
-    class TGW awsPurple
+    class VPCPeer awsPurple
     class VPCEast vpcBox
     class AZE1,AZE2,AZE3 azBox
     class West regionBox
@@ -220,7 +220,7 @@ The platform implements an Active-Active multi-region deployment strategy across
 
 ### 4. Network Backbone
 
-**AWS Transit Gateway** (or Inter-Region VPC Peering) establishes bi-directional private connectivity between the two VPCs. This critical infrastructure enables Cassandra nodes to replicate data and execute gossip protocol communications over the private AWS backbone, avoiding the public internet for enhanced security and performance.
+**Inter-Region VPC Peering** establishes bi-directional private connectivity between the two VPCs. This critical infrastructure enables Cassandra nodes to replicate data and execute gossip protocol communications over the private AWS backbone, avoiding the public internet for enhanced security and performance. VPC Peering is the optimal choice for this two-region architecture, providing dedicated bandwidth and lower costs compared to Transit Gateway.
 
 ---
 
@@ -286,7 +286,7 @@ The platform runs in two AWS regions (Active-Active) to ensure low latency and h
 - **Network Isolation (VPC Design)**: Each region operates within its own Virtual Private Cloud (VPC) distributed across 3 Availability Zones (AZs).
   - All compute and data tiers are isolated in Private Subnets, accessible only via internal VPC routing
   - Ingress traffic is strictly controlled via internet-facing Application Load Balancers (ALBs) in the public subnets
-  - AWS Transit Gateway is utilized to bridge the East and West VPCs, enabling secure, low-latency, private backbone communication for Cassandra cross-region replication and Kafka cluster mirroring
+  - Inter-Region VPC Peering is utilized to bridge the East and West VPCs, enabling secure, low-latency, private backbone communication for Cassandra cross-region replication with dedicated bandwidth
 
 - **Managed Services**:
   - **Amazon EKS**: Manages our Kubernetes clusters for Java microservices. Services automatically scale based on Kafka queue size
