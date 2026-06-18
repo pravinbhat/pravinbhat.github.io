@@ -20,7 +20,7 @@ The architecture separates operational data from analytics data to maintain perf
 ## System Diagram
 
 ```mermaid
-flowchart LR
+flowchart TB
   subgraph CL["Client Layer"]
     WC["Web Clients<br/>(JS Game Engine)"]
     NC["Native Clients<br/>(C++/Rust Desktop/Mobile)"]
