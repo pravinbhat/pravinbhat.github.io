@@ -1,3 +1,12 @@
+---
+layout: default
+title: "NexusOne (NX1) Regulatory Reporting Pipeline Migration"
+description: "Architecture Design Memo"
+permalink: /nx1-sa-review/
+date: 2026-07-13
+author: Pravin Bhat
+---
+
 # NexusOne (NX1) Regulatory Reporting Pipeline Migration — Architecture Design Memo
 
 **Classification:** Confidential — Solutions Architecture Review Board  
