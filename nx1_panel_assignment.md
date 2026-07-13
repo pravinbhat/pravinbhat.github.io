@@ -1,0 +1,11 @@
+# Project
+
+The bank wants to migrate their regulatory reporting data pipelines — currently running on an on-prem Hadoop cluster — to NX1. The business outcome is faster time-to-report for their Basel III and CCAR submissions, with a target of cutting end-of-quarter reporting cycle time by 40%. Their existing environment includes Oracle data warehouse (source of record), an IBM MQ messaging layer, and a set of downstream Tableau dashboards used by the CFO's office. They are integrating with a third-party regulatory data aggregator that has a fixed API contract they cannot change. Their compliance team has mandated full data lineage tracking and a 7-year retention policy. The program timeline is 18 months to full production. They have named two hard constraints: no raw PII in the data lake, and no disruption to the existing Tableau layer during migration.
+
+### Produce the design memo you would put in front of their SA review board. It should cover:
+
+- Architecture design Your proposed NX1 architecture for this migration, including integration patterns for the existing systems, how you handle the regulatory and governance requirements, and how you sequence the 18-month delivery. Call out the assumptions you've made where the brief is ambiguous.
+
+- Stakeholder landscape Identify the stakeholders you would need to engage to validate and execute this design — who they are, what they own, and what you need from each of them. Include both the customer-side stakeholders and any internal Nexus stakeholders. Describe how you would approach gathering requirements and alignment from a group that likely has competing priorities.
+
+- Assessment back to Nexus engineering and product Based on what this customer is asking for, write the internal memo you would send to Nexus engineering and product. What does this engagement reveal about product gaps, missing capabilities, or delivery risks? What do you need from engineering before you can commit to the design you've proposed? Be specific — this is not a wishlist, it is a risk-flagged assessment that engineering can act on.
