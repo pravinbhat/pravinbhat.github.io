@@ -60,7 +60,7 @@ The following constraints are treated as absolute design boundaries. No phase of
 #### Current-State Data Flow
 
 ```mermaid
-flowchart LR
+flowchart TB
     %% ── INGESTION (batch, end-of-quarter) ───────────────────
     subgraph INGEST["① INGESTION  ⚠ end-of-quarter batch accumulation"]
         direction TB
@@ -104,7 +104,7 @@ flowchart LR
 The target-state pipeline flows through four stages: Ingestion (Section 3.3) → Computation (Section 3.4) → Query & Visualization (Section 3.5) → Regulatory Submission (Section 3.6).
 
 ```mermaid
-flowchart LR
+flowchart TD
     %% ── INGESTION ──────────────────────────────────────────
     subgraph INGESTION["① INGESTION"]
         direction TB
