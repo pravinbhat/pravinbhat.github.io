@@ -10,11 +10,17 @@ author: Pravin Bhat
 # NexusOne (NX1) Regulatory Reporting Pipeline Migration — Architecture Design Memo
 
 **Classification:** Confidential
+
 **Prepared by:** Principal Solutions Architect, NexusOne
+
 **Version:** 1.1
+
 **Client:** Tier-1 US Retail & Investment Bank, Charlotte NC
+
 **Program:** Basel III & CCAR Pipeline Modernization — 18-Month
+
 **Audience:** SA Review Board & InfoSec Guardians
+
 **Distribution:** Restricted — Program Principals Only
 
 ---
